@@ -1,0 +1,15 @@
+{
+  "name": "JQuery.Marquee",
+  "homepage": "https://github.com/mo3taz-abdallh/jQuery.Marquee",
+  "version": "1.3.2",
+  "_release": "1.3.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.3.2",
+    "commit": "e05f18a45cc78feb5c779d182b670d1f65370069"
+  },
+  "_source": "https://github.com/mo3taz-abdallh/jQuery.Marquee.git",
+  "_target": "^1.3.2",
+  "_originalSource": "JQuery.Marquee",
+  "_direct": true
+}

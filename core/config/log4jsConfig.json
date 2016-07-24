@@ -1,0 +1,17 @@
+{
+    "appenders": [
+        {
+            "type": "file",
+            "filename": "logs/app.log",
+            "maxLogSize": 20480,
+            "backups": 3
+
+        }
+    ],
+    "replaceConsole": true,
+    "levels":{
+        "SQL":"DEBUG",
+        "[all]":"DEBUG"
+    }
+
+}
