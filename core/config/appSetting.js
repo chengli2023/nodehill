@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 var session = require("express-session");
 var ejs = require('ejs');
 var log4js = require('log4js');
-log4js.configure('./core/config/log4jsConfig.json',{ reloadSecs: 5 });
+log4js.configure('core/config/log4jsConfig.json',{ reloadSecs: 5 });
 
 module.exports = function (app) {
 

@@ -9,6 +9,8 @@
     <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/public/javascripts/scroll.js"></script>
+    <script src="/public/javascripts/layer-v2.4/layer/layer.js"></script>
+
     <style>
         .buyItem{height: 600px; overflow: hidden;}
         .buyItem ul li{border-bottom: 1px solid #cccccc; line-height: 40px; height: 40px;}
@@ -177,6 +179,8 @@
         $('#arrow1').css('display','none');
         $('#dl2').css('display','none');
         $('#arrow2').css('display','none');
+        //加载层-默认风格
+        layer.load();
         $.ajax({
             type: "get",
             url: "/queryBuyList?username=" + $("#username4search").val() ,
@@ -267,6 +271,9 @@
             error: function (err) {
                 //$(".res_error").html(err.responseJSON.errors)
                 console.log(err)
+            },
+            complete:function(XHR, TS){
+                layer.closeAll('loading');
             }
         });
     }

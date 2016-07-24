@@ -1,152 +1,46 @@
-[2016-07-24 13:02:45.017] [DEBUG] CONTROLLER:INDEX - 113/Users/licheng/Documents/huaxun/iRecommend-demo/core/controller/Index.js.
-[2016-07-24 13:15:32.005] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:15:42.416] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:16:04.638] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:21:09.932] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:23:53.872] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:30:16.854] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:30:24.135] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:30:27.140] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:30:31.840] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:30:33.304] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:30:34.689] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:30:36.079] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:35:20.235] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:35:30.373] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:35:39.781] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:36:42.882] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:36:55.455] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:36:59.337] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:37:57.653] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:44:51.209] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:44:51.221] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:44:51.367] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:44:51.634] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:44:59.183] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:45:11.353] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:45:16.401] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:45:27.300] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:45:34.794] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:45:37.292] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:45:39.537] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:45:42.558] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:47:00.749] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:00.923] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:01.133] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:01.302] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:49.202] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:49.340] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:49.501] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:50.151] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:50.337] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:50.508] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:50.629] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:47:50.725] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:48:35.354] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:48:35.517] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:48:35.755] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:48:36.052] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:48:36.597] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:48:36.759] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:48:36.895] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:48:37.004] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:49:15.061] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:49:15.364] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:49:15.209] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:49:15.518] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 13:49:45.133] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:49:48.455] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 14:32:43.265] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 14:32:43.419] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 14:32:43.558] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 14:32:43.850] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 14:33:04.798] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 14:33:04.981] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 14:33:05.113] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
-[2016-07-24 14:33:05.319] [WARN] console - Warning: connect.session() MemoryStore is not
-designed for a production environment, as it will leak
-memory, and will not scale past a single process.
+[2016-07-24 19:34:48.302] [DEBUG] SQL - Executing (default): select userrec.good goodid, goodid2name.goodname goodname,count(distinct goodid) from  userrec inner join goodid2name inner join useridname on goodid2name.goodid=userrec.good and useridname.userid =userrec.user where userrec.user='1000437' group by userid,goodid limit 10 offset 0
+[2016-07-24 19:34:49.342] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1006322' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:35:51.559] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
+[2016-07-24 19:35:53.271] [DEBUG] SQL - Executing (default): select useridname.userid userid,useridname.username username from useridname where LOWER(username)='关小莲' limit 1 offset 0
+[2016-07-24 19:35:53.288] [DEBUG] SQL - Executing (default): select usergood.good goodid, goodid2name.goodname goodname, count(distinct goodid) from  usergood inner join goodid2name inner join useridname on goodid2name.goodid=usergood.good and useridname.userid =usergood.user where usergood.user ='1000410'  group by goodid limit 10 offset 0
+[2016-07-24 19:35:53.531] [DEBUG] SQL - Executing (default): select userrec.good goodid, goodid2name.goodname goodname,count(distinct goodid) from  userrec inner join goodid2name inner join useridname on goodid2name.goodid=userrec.good and useridname.userid =userrec.user where userrec.user='1000410' group by userid,goodid limit 10 offset 0
+[2016-07-24 19:35:54.452] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='10038262' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:35:56.574] [DEBUG] SQL - Executing (default): select useridname.userid userid,useridname.username username from useridname where LOWER(username)='寿雪玲' limit 1 offset 0
+[2016-07-24 19:35:56.598] [DEBUG] SQL - Executing (default): select usergood.good goodid, goodid2name.goodname goodname, count(distinct goodid) from  usergood inner join goodid2name inner join useridname on goodid2name.goodid=usergood.good and useridname.userid =usergood.user where usergood.user ='1000144'  group by goodid limit 10 offset 0
+[2016-07-24 19:35:57.552] [DEBUG] SQL - Executing (default): select userrec.good goodid, goodid2name.goodname goodname,count(distinct goodid) from  userrec inner join goodid2name inner join useridname on goodid2name.goodid=userrec.good and useridname.userid =userrec.user where userrec.user='1000144' group by userid,goodid limit 10 offset 0
+[2016-07-24 19:35:58.434] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1001864' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:35:58.703] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='10038262' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:35:58.978] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1006347' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:35:59.412] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1025496' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:35:59.698] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1034256' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:35:59.937] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1095443' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:00.213] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='4922' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:06.205] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
+[2016-07-24 19:36:10.016] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
+[2016-07-24 19:36:11.817] [DEBUG] SQL - Executing (default): select useridname.userid userid,useridname.username username from useridname where LOWER(username)='芮铭操' limit 1 offset 0
+[2016-07-24 19:36:11.843] [DEBUG] SQL - Executing (default): select usergood.good goodid, goodid2name.goodname goodname, count(distinct goodid) from  usergood inner join goodid2name inner join useridname on goodid2name.goodid=usergood.good and useridname.userid =usergood.user where usergood.user ='1000472'  group by goodid limit 10 offset 0
+[2016-07-24 19:36:12.955] [DEBUG] SQL - Executing (default): select userrec.good goodid, goodid2name.goodname goodname,count(distinct goodid) from  userrec inner join goodid2name inner join useridname on goodid2name.goodid=userrec.good and useridname.userid =userrec.user where userrec.user='1000472' group by userid,goodid limit 10 offset 0
+[2016-07-24 19:36:13.841] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='10279645' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:14.086] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='10279661' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:14.360] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1078983' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:14.597] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='15' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:14.847] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='6685651' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:15.069] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='6853418' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:15.322] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='6872130' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:15.602] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='78' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:36:53.939] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
+[2016-07-24 19:36:55.308] [DEBUG] SQL - Executing (default): select useridname.userid userid,useridname.username username from useridname where LOWER(username)='关小莲' limit 1 offset 0
+[2016-07-24 19:36:55.320] [DEBUG] SQL - Executing (default): select usergood.good goodid, goodid2name.goodname goodname, count(distinct goodid) from  usergood inner join goodid2name inner join useridname on goodid2name.goodid=usergood.good and useridname.userid =usergood.user where usergood.user ='1000410'  group by goodid limit 10 offset 0
+[2016-07-24 19:36:55.613] [DEBUG] SQL - Executing (default): select userrec.good goodid, goodid2name.goodname goodname,count(distinct goodid) from  userrec inner join goodid2name inner join useridname on goodid2name.goodid=userrec.good and useridname.userid =userrec.user where userrec.user='1000410' group by userid,goodid limit 10 offset 0
+[2016-07-24 19:36:56.611] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='10038262' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:37:00.274] [DEBUG] SQL - Executing (default): select useridname.userid userid,useridname.username username from useridname where LOWER(username)='窦小琴' limit 1 offset 0
+[2016-07-24 19:37:00.299] [DEBUG] SQL - Executing (default): select usergood.good goodid, goodid2name.goodname goodname, count(distinct goodid) from  usergood inner join goodid2name inner join useridname on goodid2name.goodid=usergood.good and useridname.userid =usergood.user where usergood.user ='1000375'  group by goodid limit 10 offset 0
+[2016-07-24 19:37:02.015] [DEBUG] SQL - Executing (default): select userrec.good goodid, goodid2name.goodname goodname,count(distinct goodid) from  userrec inner join goodid2name inner join useridname on goodid2name.goodid=userrec.good and useridname.userid =userrec.user where userrec.user='1000375' group by userid,goodid limit 10 offset 0
+[2016-07-24 19:37:02.993] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1083441' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:37:03.253] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1087201' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:37:03.538] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='15' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 19:37:03.808] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='4294' group by gooduser.good,gooduser.user limit 10 offset 0
+[2016-07-24 20:03:17.616] [DEBUG] SQL - Executing (default): select useridname.userid userid,useridname.username username from useridname where LOWER(username)='孟凡庸' limit 1 offset 0
+[2016-07-24 20:03:17.619] [DEBUG] SQL - Executing (default): select usergood.good goodid, goodid2name.goodname goodname, count(distinct goodid) from  usergood inner join goodid2name inner join useridname on goodid2name.goodid=usergood.good and useridname.userid =usergood.user where usergood.user ='1000507'  group by goodid limit 10 offset 0
+[2016-07-24 20:03:17.913] [DEBUG] SQL - Executing (default): select userrec.good goodid, goodid2name.goodname goodname,count(distinct goodid) from  userrec inner join goodid2name inner join useridname on goodid2name.goodid=userrec.good and useridname.userid =userrec.user where userrec.user='1000507' group by userid,goodid limit 10 offset 0
+[2016-07-24 20:03:18.942] [DEBUG] SQL - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='2003588' group by gooduser.good,gooduser.user limit 10 offset 0
