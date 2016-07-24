@@ -27,7 +27,7 @@ var exports = module.exports =new Sequelize('good1', null,null, {
     },
 
     // SQLite only
-    storage: '/Users/licheng/Documents/huaxun/iRecommend-demo/sqlite_db/good1.db',
+    storage: 'sqlite_db/good1.db',
     logging:logger.debug.bind(logger)
 });
 
