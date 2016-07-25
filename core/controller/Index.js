@@ -27,8 +27,8 @@ router.get('/', function (req, res, next) {
 
 router.post('/save', function (req, res, next) {
 
-    var username = req.query['saveUsername'];
-    var goodname = req.query['saveGoodName'];
+    var username = req.body['saveUsername'];
+    var goodname = req.body['saveGoodName'];
     db.transaction(function (transaction) {
         return co(function* (){
             //校验用户名是否存在
