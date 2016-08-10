@@ -9,102 +9,81 @@ var co = require('co');
 var logger = require('log4js').getLogger('CONTROLLER:INDEX');
 
 var AllModel = require('../models/AllModel')
+var ProfileModel = require('../models/ProfileModel')
 var db = require('../config/db/db')
 
 router.$requestMapping = '/';
 router.get('/', function (req, res, next) {
-    co(function* (){
-        var buyList = yield AllModel.findAllBuyList({});
-        res.render('index', {
-
-            req: req,
-            buyList:buyList
-        });
-    }).catch(function(e){
-        next(e)
-    });
+    res.redirect('/admin/search')
+});
+/*
+router.get('/', function (req, res, next) {
+    res.redirect('/login')
+});
+router.get('/login', function (req, res, next) {
+    res.render('login', {req});
 });
 
-router.post('/save', function (req, res, next) {
-
-    var username = req.body['saveUsername'];
-    var goodname = req.body['saveGoodName'];
-    db.transaction(function (transaction) {
-        return co(function* (){
-            //校验用户名是否存在
-
-            let checkResult = true;
-            let checkMsg = [];
-            let currMaxUserid = 0;
-
-            //校验商品名称是否存在
-            var goodObj = yield AllModel.getGood({goodname});
-            if(!goodObj || !goodObj.goodid) {
-                checkResult = false;
-                checkMsg.push('音乐名称不存在');
-            }
-
-            if(!checkResult){
-                res.json(utils.genJsonRes.genErrorRes({msg:checkMsg.join(', ')}));
-                return;
-            }
-            var userObj = yield AllModel.getUser({username});
-            if(!userObj || !userObj.userid) {
-                let getMaxUserIdResult = yield AllModel.genUserId();
-                currMaxUserid = getMaxUserIdResult.maxUserId + 1;
-                yield AllModel.saveUserInfo({'userid':currMaxUserid,username},transaction);
-                userObj = {userid:currMaxUserid,username:username}
-            }
-
-            var saveResult = yield AllModel.saveBuyInfo({'userid':userObj.userid,'goodid':goodObj.goodid},transaction);
-            yield AllModel.saveBuyInfo2({'userid':userObj.userid,'goodid':goodObj.goodid},transaction);
-
-            res.json(utils.genJsonRes.genSuccessRes({result:{username:userObj.username,goodname:goodObj.goodname}}));
-
-
-        }).catch(function(e){
-            next(e)
-        });
-    })
-
+router.get('/search', function (req, res, next) {
+    res.render('search', {req});
 });
-
-router.get('/queryBuyList', function (req, res, next) {
+router.get('/searchResult', function (req, res, next) {
+    res.render('searchResult', {req});
+});
+router.get('/profile', function (req, res, next) {
     co(function* (){
-        var username = req.query['username'];
-        //校验用户名是否存在
-        var userObj = yield AllModel.getUser({username});
-        if(!userObj || !userObj.userid) res.json(utils.genJsonRes.genErrorRes({msg:'用户不存在'}));
-
-        var buyList = yield AllModel.findBuyListByUser({userid:userObj.userid})
-        var recList = yield AllModel.findRecListByUser({userid:userObj.userid})
-
-        for(let i = 0;i < buyList.length;i ++){
-            let item = buyList[i];
-            let userListStr = [];
-            let userList = yield AllModel.findUserListByGoodId({'goodid':item.goodid})
-            for(let i = 0; i < userList.length; i ++){
-                userListStr.push(userList[i].username)
-            }
-            item.userList = userListStr;
+        var peopleId = req.query['peopleId']
+        let peopleData = yield ProfileModel.obtainProfileById({peopleId});
+        if(peopleData == null){
+            res.redirect('/search')
+            return;
         }
-
-        /*for(let i = 0;i < recList.length;i ++){
-            let item = recList[i];
-            let userListStr = [];
-            let userList = yield AllModel.findUserListByGoodId({'goodid':item.goodid})
-            for(let i = 0; i < userList.length; i ++){
-                userListStr.push(userList[i].username)
-            }
-            item.userList = userListStr;
-        }*/
-
-        res.json({
-            buyList,
-            recList
-        })
+        res.render('profile', {req,peopleData});
     }).catch(function(e){
-        next(e)
+        res.json(500,{error: e.message});
     });
 });
+router.get('/zichanAnalyze', function (req, res, next) {
+    var peopleId = req.query['peopleId']
+    res.render('zichanAnalyze', {req});
+});
+router.get('/guijiAnalyze', function (req, res, next) {
+    var peopleId = req.query['peopleId']
+    res.render('guijiAnalyze', {req});
+});
+router.get('/xiaofeiAnalyze', function (req, res, next) {
+    var peopleId = req.query['peopleId']
+    res.render('xiaofeiAnalyze', {req});
+});
+router.get('/renmaiAnalyze', function (req, res, next) {
+    var peopleId = req.query['peopleId']
+    res.render('renmaiAnalyze', {req});
+});
+
+router.get('/sheaninfo', function (req, res, next) {
+    co(function* (){
+        var peopleId = req.query['peopleId']
+        let peopleData = yield ProfileModel.obtainProfileById({peopleId});
+
+        let peopleData2 = null;
+        if(peopleId == 1) {
+            peopleData2 = yield ProfileModel.obtainProfileById({peopleId:2});
+        }
+        if(peopleId == 2) {
+            peopleData2 = yield ProfileModel.obtainProfileById({peopleId:1});
+        }
+        if(peopleId == 3) {
+            peopleData2 = yield ProfileModel.obtainProfileById({peopleId:1});
+        }
+        if(peopleData == null){
+            res.redirect('/search')
+            return;
+        }
+        res.render('sheaninfo', {req,peopleData,peopleData2});
+    }).catch(function(e){
+        res.json(500,{error: e.message});
+    });
+});
+*/
+
 module.exports = router;

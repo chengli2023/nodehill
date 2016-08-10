@@ -1,0 +1,261 @@
+﻿<%var peopleId = req.query['peopleId']%>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>执行研判</title>
+    <link rel='stylesheet' href='/public/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+    <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/javascripts/layer-v2.4/layer/layer.js"></script>
+    <script src="/public/javascripts/echarts.js"></script>
+
+    <style>
+        .yourclass{width: 380px; height:150px;}
+    </style>
+</head>
+<body style="">
+<div style="width: 1024px; margin: auto">
+    <div style=" height:148px;background:url(/public/images/main-bg.jpg) no-repeat">
+        <div class="signout">
+            <ul>
+                <li>管理员:admin</li>
+                <li style="float: right"><a href="/login" style="color: #ffffff">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="fk_searchBox">
+            <input type="text" style="height: 34px; width: 400px; border: 1px solid red ">
+            <img src="/public/images/search-bt.gif" onclick="javascript:location.href='/searchResult'"/>
+        </div>
+        <div style="clear: both"></div>
+        <div class="fk_main">
+            <% include ./include/menu.html %>
+            <div class="profileBody">
+                <div class="profileTabBar">
+                    <div class="profileTabTile active">
+                        <a href="/profile?peopleId=<%=peopleId%>">个人信息</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/sheaninfo?peopleId=<%=peopleId%>">涉案信息</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/zichanAnalyze?peopleId=<%=peopleId%>">资产分析</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/guijiAnalyze?peopleId=<%=peopleId%>">轨迹分析</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/xiaofeiAnalyze?peopleId=<%=peopleId%>">消费分析</a>
+                    </div>
+                    <div class="profileTabTile ">
+                        <a href="/renmaiAnalyze?peopleId=<%=peopleId%>">人脉分析</a>
+                    </div>
+                </div>
+                <div class="tabunderline"></div>
+                <div id="profile1" style="margin-top: 10px;">
+                    <div style="border: 1px solid red; height: 250px; padding: 20px;">
+                        <div style=" width: 180px; float:left;">
+                            <%if(peopleData)%>
+                            <img src="/public/images/user-icon.jpg">
+                        </div>
+                        <div style="width: 530px; float: right; text-align: left; line-height: 30px; font-size: 16px;">
+                            <div>
+                                <table width="506" height="205" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td width="153" height="40" valign="top"><strong>姓名:</strong>
+                                            <%=peopleData.name%>
+                                        </td>
+                                        <td width="168" valign="top"><strong>性别:</strong> <%=peopleData.sex%></td>
+                                        <td width="163" valign="top"><strong>年龄:</strong> <%=peopleData.age%></td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top"><strong>婚姻状况:</strong> <%=peopleData.isMarried%></td>
+                                        <td colspan="2" valign="top"><strong>手机号码: </strong><%=peopleData.telNumber%>
+                                            <button type="button" class="btn btn-success" onclick="callLayer();"><span class="glyphicon glyphicon-earphone"></span></button>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" valign="top"><strong>住址:</strong> <%=peopleData.addr%></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" valign="top"><strong>身份证号:</strong> <%=peopleData.idNumber%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" valign="top"><strong>职位信息:</strong> <%=peopleData.zhiwuxingxi%>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="profile-conclusion">
+                        执行力综合评判得分:<span style="font-size: 24px;"><%=peopleData.score%></span>(执行能力强)
+                        <!--<span style="float: right">查看涉案信息</span>-->
+                    </div>
+                    <div style="padding: 10px 10px">
+                        <div id="chart" style="width: 750px;height:400px;"></div>
+                        <script>
+                            var myChart_chart = echarts.init(document.getElementById('chart'));
+                            chart_option = {
+                                title: {
+                                    text: '综合评估'
+                                },
+                                legend: {
+                                    data: ['图一','图二', '<%=peopleData.name%>']
+                                },
+                                radar: [
+                                    {
+                                        indicator: [
+                                            { text: '指标一' },
+                                            { text: '指标二' },
+                                            { text: '指标三' },
+                                            { text: '指标四' },
+                                            { text: '指标五' }
+                                        ],
+                                        center: ['25%', '50%'],
+                                        radius: 120,
+                                        startAngle: 90,
+                                        splitNumber: 4,
+                                        shape: 'circle',
+                                        name: {
+                                            formatter:'【{value}】',
+                                            textStyle: {
+                                                color:'#72ACD1'
+                                            }
+                                        },
+                                        splitArea: {
+                                            areaStyle: {
+                                                color: ['rgba(114, 172, 209, 0.2)',
+                                                    'rgba(114, 172, 209, 0.4)', 'rgba(114, 172, 209, 0.6)',
+                                                    'rgba(114, 172, 209, 0.8)', 'rgba(114, 172, 209, 1)'],
+                                                shadowColor: 'rgba(0, 0, 0, 0.3)',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        axisLine: {
+                                            lineStyle: {
+                                                color: 'rgba(255, 255, 255, 0.5)'
+                                            }
+                                        },
+                                        splitLine: {
+                                            lineStyle: {
+                                                color: 'rgba(255, 255, 255, 0.5)'
+                                            }
+                                        }
+                                    },
+                                    {
+                                        indicator: [
+                                            { text: '出行', max: 150 },
+                                            { text: '消费', max: 150 },
+                                            { text: '动产', max: 150 },
+                                            { text: '不动产', max: 120 },
+                                            { text: '关系', max: 108 },
+                                            { text: '其他', max: 72 }
+                                        ],
+                                        center: ['75%', '50%'],
+                                        radius: 120
+                                    }
+                                ],
+                                series: [
+                                    {
+                                        name: '雷达图',
+                                        type: 'radar',
+                                        itemStyle: {
+                                            emphasis: {
+                                                // color: 各异,
+                                                lineStyle: {
+                                                    width: 4
+                                                }
+                                            }
+                                        },
+                                        data: [
+                                            {
+                                                value: [100, 8, 0.40, -80, 2000],
+                                                name: '图一',
+                                                symbol: 'rect',
+                                                symbolSize: 5,
+                                                lineStyle: {
+                                                    normal: {
+                                                        type: 'dashed'
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                value: [60, 5, 0.30, -100, 1500],
+                                                name: '图二',
+                                                areaStyle: {
+                                                    normal: {
+                                                        color: 'rgba(255, 255, 255, 0.5)'
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        name: '成绩单',
+                                        type: 'radar',
+                                        radarIndex: 1,
+                                        data: [
+                                            {
+                                                value: [120, 118, 130, 100, 99, 70],
+                                                name: '<%=peopleData.name%>',
+                                                label: {
+                                                    normal: {
+                                                        show: true,
+                                                        formatter:function(params) {
+                                                            return params.value;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+
+                            myChart_chart.setOption(chart_option);
+                        </script>
+                    </div>
+                    <div style="clear: both;height: 40px;font-size: 16px; background: red; color: #fff; line-height: 40px; padding: 0px 10px;">可执行金额总计:1200万</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <% include ./include/footer.html %>
+</div>
+
+<script>
+    function callLayer(){
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            shadeClose: false,
+            skin: 'yourclass',
+            content: '  <div style="padding: 20px;">' +
+            '               <div style="float: left;width: 120px;">' +
+            '                   <img src="/public/images/callicon.png">' +
+            '               </div>' +
+            '               <div style="width: 180px; float: left;margin-left: 15px;">' +
+            '                   <span style="font-size: 24px;">正在拨号...</span>' +
+            '                   <div style="font-size: 16px;"><%=peopleData.telNumber%></div>' +
+            '               </div>' +
+            '               <div style="position: absolute;right: 20px;bottom: 5px;"><button type="button" class="btn btn-danger" onclick="javascript:layer.closeAll()">挂断</button></div>' +
+            '           </div>'
+        });
+    }
+
+</script>
+
+
+</body>
+</html>

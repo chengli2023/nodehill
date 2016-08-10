@@ -1,0 +1,15 @@
+<%var peopleId = req.query['peopleId']%>
+<div class="menu-out-box">
+    <ul>
+        <li>执行分析</li>
+        <ul>
+            <li><a href="<%if(!isNaN(peopleId)){%>/sheaninfo?peopleId=<%=peopleId%><%}else{%>#<%}%>">涉案信息</a></li>
+            <li><a href="<%if(!isNaN(peopleId)){%>/zichanAnalyze?peopleId=<%=peopleId%><%}else{%>#<%}%>">资产分析</a></li>
+            <li><a href="<%if(!isNaN(peopleId)){%>/guijiAnalyze?peopleId=<%=peopleId%><%}else{%>#<%}%>">轨迹分析</a></li>
+            <li><a href="<%if(!isNaN(peopleId)){%>/xiaofeiAnalyze?peopleId=<%=peopleId%><%}else{%>#<%}%>">消费分析</a></li>
+        </ul>
+        <li>告警设置</li>
+        <li>系统设置</li>
+    </ul>
+
+</div>

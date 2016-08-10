@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>执行研判</title>
+    <link rel='stylesheet' href='/public/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+    <link rel='stylesheet' href='/public/javascripts/jquery-ui-1.12.0.custom/jquery-ui.css'/>
+    <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/public/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/public/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/javascripts/jquery-ui-1.12.0.custom/jquery-ui.js"></script>
+    <script src="/public/javascripts/echarts.js"></script>
+    <script src="/public/javascripts/main.js"></script>
+
+    <style>
+    </style>
+</head>
+<body>
+    <div style='width: 1024px; height: 800px;margin:auto; background:url("/public/images/login-bg.jpg"); position: relative'>
+        <div style="width: 302px; height: 251px;background-image: url(/public/images/login-form.gif); position: relative; left:500px;top:300px;">
+            <form id="adminLoginForm" name="adminLoginForm" method="post" action="/login">
+                <input style="position:absolute; top:90px;left:70px; height: 32px; width: 200px;
+                BACKGROUND-COLOR: transparent; border: 0; color: #fff" value="admin" type="text" name="username" id="username"/>
+
+                <input style="position:absolute; top:150px;left:70px; height: 32px; width: 200px;
+                BACKGROUND-COLOR: transparent; border: 0; color: #fff" value="" type="password" name="password" id="password"/>
+                <button type="submit" hidden="hidden"></button>
+            </form>
+            <div style="position: relative; top:195px; width:128px; margin: auto">
+                <img style="cursor:pointer" src="/public/images/login-bt-active.png" id="loginBt" onclick="javascript:$('#adminLoginForm').submit()">
+
+            </div>
+
+        </div>
+        <div style="height: 54px; position: absolute; left: 500px; top: 551px;">
+            <div id="forgetBt" style="cursor: pointer;float: left; height:54px; width:178px;background-image: url(/public/images/forget-bt-grey.gif)"></div>
+            <div id="rememberBt" class="remember remember-active"></div>
+        </div>
+    </div>
+    <script>
+
+        $("#loginBt").hover(function(){
+            this.src="/public/images/login-bt-red.png"
+        },function(){
+            this.src="/public/images/login-bt-active.png"
+        });
+        $("#forgetBt").hover(function(){
+            this.src="/public/images/forget-bt-active.gif"
+        },function(){
+            this.src="/public/images/orget-bt-grep.gif"
+        });
+        var isRemember = false;
+        $("#rememberBt").click(function(){
+            if(isRemember) {
+                isRemember=false;
+                $(this).toggleClass("remember-active")
+            }else{
+                isRemember=true;
+                $(this).toggleClass("remember-active")
+            }
+        });
+
+        $(function(){
+            $("#rememberBt").src=isRemember?"/public/images/remember-bt-active.gif":"/public/images/remember-bt-grey.gif";
+
+            $("#adminLoginForm").validate({
+                rules: {
+                    username: {
+                        required: true,
+                        minlength: 5
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    }
+                },
+                submitHandler:function(form){
+                    $.ajax({
+                        type: "POST",
+                        url:'/admin/login',
+                        data:{
+                            username:$('#username').val(),
+                            password:$('#password').val()
+                        },
+                        success: function(data) {
+                            if(data.error){
+                                //alert(data.error)
+                                tipDialog.open({
+                                    level:3,
+                                    body:data.error
+                                })
+                            }else{
+                                window.location.href='/admin/search'
+                            }
+                        }
+                    })
+                }
+            });
+        })
+    </script>
+
+
+</body>
+</html>

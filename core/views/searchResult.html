@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>执行研判</title>
+    <link rel='stylesheet' href='/public/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+    <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/javascripts/layer-v2.4/layer/layer.js"></script>
+    <script src="/public/javascripts/echarts.js"></script>
+
+    <style>
+
+    </style>
+</head>
+<body style="">
+    <div style="width: 1024px; margin: auto">
+        <div style=" height:148px;background:url(/public/images/main-bg.jpg) no-repeat">
+            <div class="signout">
+                <ul>
+                    <li>管理员:admin</li>
+                    <li style="float: right"><a href="/login" style="color: #ffffff">退出</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-container">
+            <div style="float: right">
+                <input type="text" style="height: 34px; width: 400px; border: 1px solid red " >
+                <img src="/public/images/search-bt.gif" onclick="javascript:location.href='/searchResult'"/>
+            </div>
+            <div style="clear: both"></div>
+            <% include ./include/menu.html %>
+            <div class="profileBody">
+                <div class="profileTabBar">
+                    <div class="profileTabTile active">
+                        搜索结果
+                    </div>
+                </div>
+                <div class="tabunderline"></div>
+                <div style="margin-top: 10px;">
+                    <table class="table table-striped">
+                       <thead>
+                           <tr>
+                               <th>序号</th>
+                               <th>姓名</th>
+                               <th>手机号</th>
+                               <th>身份证</th>
+                               <th>查看</th>
+                           </tr>
+                       </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
+                                <td>李畅畅</td>
+                                <td>13009091256</td>
+                                <td>342422198209082331</td>
+                                <td><button type="button" class="btn btn-warning" onclick="javascript:location.href='/profile?peopleId=1'">详细信息</button></td>
+                            </tr>
+                            <tr>
+                                <th>2</th>
+                                <td>吴美浓</td>
+                                <td>13328198728</td>
+                                <td>330224195909086028</td>
+                                <td><button type="button" class="btn btn-warning" onclick="javascript:location.href='/profile?peopleId=2'">详细信息</button></td>
+                            </tr>
+                            <tr>
+                                <th>3</th>
+                                <td>应玉儿</td>
+                                <td>13016969816</td>
+                                <td>330224197001230027</td>
+                                <td><button type="button" class="btn btn-warning" onclick="javascript:location.href='/profile?peopleId=3'" >详细信息</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <% include ./include/footer.html %>
+    </div>
+
+    <script>
+        $("#loginBt").hover(function(){
+            this.src="/public/images/login-bt-red.png"
+        },function(){
+            this.src="/public/images/login-bt-active.png"
+        });
+        $("#forgetBt").hover(function(){
+            this.src="/public/images/forget-bt-active.gif"
+        },function(){
+            this.src="/public/images/orget-bt-grep.gif"
+        });
+        var isRemember = false;
+        $("#rememberBt").click(function(){
+            if(isRemember) {
+                isRemember=false;
+                $(this).toggleClass("remember-active")
+            }else{
+                isRemember=true;
+                $(this).toggleClass("remember-active")
+            }
+        });
+
+        $(function(){
+            this.src=isRemember?"/public/images/remember-bt-active.gif":"/public/images/remember-bt-grey.gif";
+        })
+    </script>
+
+
+</body>
+</html>

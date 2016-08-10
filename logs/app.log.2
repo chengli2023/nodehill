@@ -1,104 +1,179 @@
-[2016-07-24 11:11:58.441] [INFO] console - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1001864' group by gooduser.good,gooduser.user limit 10 offset 0
-[2016-07-24 11:11:58.743] [INFO] console - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1008798' group by gooduser.good,gooduser.user limit 10 offset 0
-[2016-07-24 11:11:59.018] [INFO] console - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='15' group by gooduser.good,gooduser.user limit 10 offset 0
-[2016-07-24 11:11:59.313] [INFO] console - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='6866965' group by gooduser.good,gooduser.user limit 10 offset 0
-[2016-07-24 11:11:59.574] [INFO] http - ::1 - - "GET /queryBuyList?username=%E6%9D%9F%E4%BC%9F%E6%98%8E HTTP/1.1" 200 1013 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:12:58.062] [ERROR] http - ::1 - - "GET /queryBuyList?username=%E5%8E%86%E8%88%92%E5%B9%B3 HTTP/1.1" 500 2460 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:13:27.355] [INFO] console - Executing (default): select useridname.userid userid,useridname.username username from useridname where LOWER(username)='慕释昕' limit 1 offset 0
-[2016-07-24 11:13:27.394] [INFO] CONTROLLER:INDEX - 999999999Sun Jul 24 2016 11:13:27 GMT+0800 (CST)
-[2016-07-24 11:13:27.394] [DEBUG] CONTROLLER:INDEX - { userid: '1000516', username: '慕释昕' }
-[2016-07-24 11:13:27.407] [INFO] console - Executing (default): select usergood.good goodid, goodid2name.goodname goodname, count(distinct goodid) from  usergood inner join goodid2name inner join useridname on goodid2name.goodid=usergood.good and useridname.userid =usergood.user where usergood.user ='1000516'  group by goodid limit 10 offset 0
-[2016-07-24 11:13:28.232] [INFO] console - Executing (default): select userrec.good goodid, goodid2name.goodname goodname,count(distinct goodid) from  userrec inner join goodid2name inner join useridname on goodid2name.goodid=userrec.good and useridname.userid =userrec.user where userrec.user='1000516' group by userid,goodid limit 10 offset 0
-[2016-07-24 11:13:29.372] [INFO] console - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1009041' group by gooduser.good,gooduser.user limit 10 offset 0
-[2016-07-24 11:13:29.660] [INFO] console - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='1018442' group by gooduser.good,gooduser.user limit 10 offset 0
-[2016-07-24 11:13:29.932] [INFO] console - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='15' group by gooduser.good,gooduser.user limit 10 offset 0
-[2016-07-24 11:13:30.247] [INFO] console - Executing (default): select useridname.username,count(distinct gooduser.good) from gooduser inner join useridname on useridname.userid=gooduser.user where gooduser.good='2003588' group by gooduser.good,gooduser.user limit 10 offset 0
-[2016-07-24 11:13:30.585] [INFO] http - ::1 - - "GET /queryBuyList?username=%E6%85%95%E9%87%8A%E6%98%95 HTTP/1.1" 200 989 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:14:11.887] [ERROR] http - ::1 - - "GET /queryBuyList?username=%E8%92%8B%E6%B2%82%E6%B6%B5 HTTP/1.1" 500 2439 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:14:36.985] [ERROR] http - ::1 - - "GET /queryBuyList?username=%E8%B4%BA%E6%99%BA%E8%8F%81 HTTP/1.1" 500 2439 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:14:45.870] [ERROR] http - ::1 - - "GET /queryBuyList?username=%E6%B9%9B%E8%B6%85%E7%84%B6 HTTP/1.1" 500 2439 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:15:29.883] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:15:30.419] [INFO] console - 113
-[2016-07-24 11:15:30.423] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:15:36.577] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:15:37.124] [INFO] console - 113
-[2016-07-24 11:15:37.136] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:15:43.840] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:15:44.447] [INFO] console - 113
-[2016-07-24 11:15:44.449] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:31:00.169] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:31:00.720] [INFO] console - 113
-[2016-07-24 11:31:00.733] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:31:09.989] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:31:10.526] [INFO] console - 113
-[2016-07-24 11:31:10.532] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:31:42.935] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:31:43.475] [INFO] console - 113
-[2016-07-24 11:31:43.477] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:31:50.745] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:31:51.323] [INFO] console - 113
-[2016-07-24 11:31:51.327] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:36:08.449] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:36:08.994] [INFO] console - 113
-[2016-07-24 11:36:09.008] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:36:13.167] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:36:13.737] [INFO] console - 113
-[2016-07-24 11:36:13.742] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:40:56.862] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:40:57.390] [INFO] console - 113
-[2016-07-24 11:40:57.404] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:41:00.628] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:41:01.203] [INFO] console - 113
-[2016-07-24 11:41:01.207] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:41:06.291] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:41:06.874] [INFO] console - 113
-[2016-07-24 11:41:06.876] [WARN] http - ::1 - - "GET / HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-[2016-07-24 11:52:06.268] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:52:06.864] [INFO] console - 113
-[2016-07-24 11:52:16.504] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:52:17.043] [INFO] console - 113
-[2016-07-24 11:56:45.882] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:56:46.447] [INFO] console - 113
-[2016-07-24 11:56:51.304] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:56:51.884] [INFO] console - 113
-[2016-07-24 11:57:04.924] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:57:05.503] [INFO] console - 113
-[2016-07-24 11:57:32.161] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 11:57:32.702] [INFO] console - 113
-[2016-07-24 12:00:30.201] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:00:30.764] [INFO] console - 113
-[2016-07-24 12:00:37.914] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:00:38.489] [INFO] console - 113
-[2016-07-24 12:00:46.645] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:00:47.222] [INFO] console - 113
-[2016-07-24 12:19:16.538] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:19:17.111] [INFO] console - 113
-[2016-07-24 12:19:22.020] [INFO] console - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:19:22.555] [INFO] console - 113
-[2016-07-24 12:21:52.485] [INFO] console - 113
-[2016-07-24 12:22:08.548] [INFO] console - 113
-[2016-07-24 12:22:13.170] [INFO] console - 113
-[2016-07-24 12:39:28.243] [INFO] console - 113
-[2016-07-24 12:39:32.119] [INFO] console - 113
-[2016-07-24 12:39:39.721] [INFO] console - 113
-[2016-07-24 12:39:45.063] [INFO] console - 113
-[2016-07-24 12:40:01.296] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:40:01.863] [INFO] console - 113
-[2016-07-24 12:42:16.385] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:42:16.986] [INFO] console - 113
-[2016-07-24 12:47:35.574] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:47:36.197] [DEBUG] console - 113
-[2016-07-24 12:48:58.457] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:48:59.054] [DEBUG] CONTROLLER:INDEX - 113
-[2016-07-24 12:49:04.229] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:49:04.748] [DEBUG] CONTROLLER:INDEX - 113
-[2016-07-24 12:49:15.219] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:49:15.803] [DEBUG] CONTROLLER:INDEX - 113
-[2016-07-24 12:49:21.971] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:49:22.550] [DEBUG] CONTROLLER:INDEX - 113
-[2016-07-24 12:49:34.610] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 12:49:35.189] [DEBUG] CONTROLLER:INDEX - 113
-[2016-07-24 12:59:27.943] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:00:34.877] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:01:20.500] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
-[2016-07-24 13:02:44.508] [DEBUG] SQL - Executing (default): select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid
+[2016-08-07 21:50:00.008] [INFO] console - /search
+[2016-08-07 21:50:00.035] [INFO] console - /login
+[2016-08-07 21:50:04.393] [INFO] console - /login
+[2016-08-07 21:50:04.709] [DEBUG] SQL - Executing (default): SELECT `Admin`.*, `Roles`.`id` AS `Roles.id`, `Roles`.`rolename` AS `Roles.rolename`, `Roles`.`roledesc` AS `Roles.roledesc`, `Roles`.`created_at` AS `Roles.created_at`, `Roles`.`updated_at` AS `Roles.updated_at`, `Roles.Admin_Role`.`created_at` AS `Roles.Admin_Role.created_at`, `Roles.Admin_Role`.`updated_at` AS `Roles.Admin_Role.updated_at`, `Roles.Admin_Role`.`adminid_fk` AS `Roles.Admin_Role.adminid_fk`, `Roles.Admin_Role`.`roleid_fk` AS `Roles.Admin_Role.roleid_fk` FROM (SELECT `Admin`.`id`, `Admin`.`username`, `Admin`.`email`, `Admin`.`password`, `Admin`.`created_at`, `Admin`.`updated_at` FROM `Admin` AS `Admin` WHERE `Admin`.`username` = 'admin' AND `Admin`.`password` = '123456' LIMIT 1) AS `Admin` LEFT OUTER JOIN (`Admin_Role` AS `Roles.Admin_Role` INNER JOIN `Role` AS `Roles` ON `Roles`.`id` = `Roles.Admin_Role`.`roleid_fk`) ON `Admin`.`id` = `Roles.Admin_Role`.`adminid_fk`;
+[2016-08-07 21:50:04.750] [INFO] console - /search
+[2016-08-07 21:50:04.757] [DEBUG] SQL - Executing (default): SELECT `Admin`.`id`, `Admin`.`username`, `Admin`.`email`, `Admin`.`password`, `Admin`.`created_at`, `Admin`.`updated_at`, `Roles`.`id` AS `Roles.id`, `Roles`.`rolename` AS `Roles.rolename`, `Roles`.`roledesc` AS `Roles.roledesc`, `Roles`.`created_at` AS `Roles.created_at`, `Roles`.`updated_at` AS `Roles.updated_at`, `Roles.Admin_Role`.`created_at` AS `Roles.Admin_Role.created_at`, `Roles.Admin_Role`.`updated_at` AS `Roles.Admin_Role.updated_at`, `Roles.Admin_Role`.`adminid_fk` AS `Roles.Admin_Role.adminid_fk`, `Roles.Admin_Role`.`roleid_fk` AS `Roles.Admin_Role.roleid_fk` FROM `Admin` AS `Admin` LEFT OUTER JOIN (`Admin_Role` AS `Roles.Admin_Role` INNER JOIN `Role` AS `Roles` ON `Roles`.`id` = `Roles.Admin_Role`.`roleid_fk`) ON `Admin`.`id` = `Roles.Admin_Role`.`adminid_fk` WHERE `Admin`.`id` = 1;
+[2016-08-07 21:50:11.527] [INFO] console - /search
+[2016-08-07 21:50:11.534] [DEBUG] SQL - Executing (default): SELECT `Admin`.`id`, `Admin`.`username`, `Admin`.`email`, `Admin`.`password`, `Admin`.`created_at`, `Admin`.`updated_at`, `Roles`.`id` AS `Roles.id`, `Roles`.`rolename` AS `Roles.rolename`, `Roles`.`roledesc` AS `Roles.roledesc`, `Roles`.`created_at` AS `Roles.created_at`, `Roles`.`updated_at` AS `Roles.updated_at`, `Roles.Admin_Role`.`created_at` AS `Roles.Admin_Role.created_at`, `Roles.Admin_Role`.`updated_at` AS `Roles.Admin_Role.updated_at`, `Roles.Admin_Role`.`adminid_fk` AS `Roles.Admin_Role.adminid_fk`, `Roles.Admin_Role`.`roleid_fk` AS `Roles.Admin_Role.roleid_fk` FROM `Admin` AS `Admin` LEFT OUTER JOIN (`Admin_Role` AS `Roles.Admin_Role` INNER JOIN `Role` AS `Roles` ON `Roles`.`id` = `Roles.Admin_Role`.`roleid_fk`) ON `Admin`.`id` = `Roles.Admin_Role`.`adminid_fk` WHERE `Admin`.`id` = 1;
+[2016-08-10 08:51:16.561] [INFO] console - /search
+[2016-08-10 08:51:16.602] [INFO] console - /login
+[2016-08-10 08:52:03.474] [INFO] console - req.route:undefined
+[2016-08-10 08:52:03.484] [INFO] console - /login
+[2016-08-10 09:48:44.868] [INFO] console - /login
+[2016-08-10 09:49:36.694] [INFO] console - /login
+[2016-08-10 10:13:42.872] [DEBUG] SQL - Executing (default): SELECT `Admin`.*, `Roles`.`id` AS `Roles.id`, `Roles`.`rolename` AS `Roles.rolename`, `Roles`.`roledesc` AS `Roles.roledesc`, `Roles`.`created_at` AS `Roles.created_at`, `Roles`.`updated_at` AS `Roles.updated_at`, `Roles.Admin_Role`.`created_at` AS `Roles.Admin_Role.created_at`, `Roles.Admin_Role`.`updated_at` AS `Roles.Admin_Role.updated_at`, `Roles.Admin_Role`.`adminid_fk` AS `Roles.Admin_Role.adminid_fk`, `Roles.Admin_Role`.`roleid_fk` AS `Roles.Admin_Role.roleid_fk` FROM (SELECT `Admin`.`id`, `Admin`.`username`, `Admin`.`email`, `Admin`.`password`, `Admin`.`created_at`, `Admin`.`updated_at` FROM `Admin` AS `Admin` WHERE `Admin`.`username` = 'admin' AND `Admin`.`password` = '123456' LIMIT 1) AS `Admin` LEFT OUTER JOIN (`Admin_Role` AS `Roles.Admin_Role` INNER JOIN `Role` AS `Roles` ON `Roles`.`id` = `Roles.Admin_Role`.`roleid_fk`) ON `Admin`.`id` = `Roles.Admin_Role`.`adminid_fk`;
+[2016-08-10 10:14:11.262] [DEBUG] SQL - Executing (default): SELECT `Admin`.`id`, `Admin`.`username`, `Admin`.`email`, `Admin`.`password`, `Admin`.`created_at`, `Admin`.`updated_at`, `Roles`.`id` AS `Roles.id`, `Roles`.`rolename` AS `Roles.rolename`, `Roles`.`roledesc` AS `Roles.roledesc`, `Roles`.`created_at` AS `Roles.created_at`, `Roles`.`updated_at` AS `Roles.updated_at`, `Roles.Admin_Role`.`created_at` AS `Roles.Admin_Role.created_at`, `Roles.Admin_Role`.`updated_at` AS `Roles.Admin_Role.updated_at`, `Roles.Admin_Role`.`adminid_fk` AS `Roles.Admin_Role.adminid_fk`, `Roles.Admin_Role`.`roleid_fk` AS `Roles.Admin_Role.roleid_fk` FROM `Admin` AS `Admin` LEFT OUTER JOIN (`Admin_Role` AS `Roles.Admin_Role` INNER JOIN `Role` AS `Roles` ON `Roles`.`id` = `Roles.Admin_Role`.`roleid_fk`) ON `Admin`.`id` = `Roles.Admin_Role`.`adminid_fk` WHERE `Admin`.`id` = 1;
+[2016-08-10 10:14:20.762] [INFO] console - sfasfsfs[object SequelizeInstance:Role]
+[2016-08-10 10:14:20.775] [DEBUG] SQL - Executing (default): SELECT `Admin`.`id`, `Admin`.`username`, `Admin`.`email`, `Admin`.`password`, `Admin`.`created_at`, `Admin`.`updated_at`, `Roles`.`id` AS `Roles.id`, `Roles`.`rolename` AS `Roles.rolename`, `Roles`.`roledesc` AS `Roles.roledesc`, `Roles`.`created_at` AS `Roles.created_at`, `Roles`.`updated_at` AS `Roles.updated_at`, `Roles.Admin_Role`.`created_at` AS `Roles.Admin_Role.created_at`, `Roles.Admin_Role`.`updated_at` AS `Roles.Admin_Role.updated_at`, `Roles.Admin_Role`.`adminid_fk` AS `Roles.Admin_Role.adminid_fk`, `Roles.Admin_Role`.`roleid_fk` AS `Roles.Admin_Role.roleid_fk` FROM `Admin` AS `Admin` LEFT OUTER JOIN (`Admin_Role` AS `Roles.Admin_Role` INNER JOIN `Role` AS `Roles` ON `Roles`.`id` = `Roles.Admin_Role`.`roleid_fk`) ON `Admin`.`id` = `Roles.Admin_Role`.`adminid_fk` WHERE `Admin`.`id` = 1;
+[2016-08-10 10:33:55.990] [DEBUG] SQL - Executing (default): INSERT INTO `Admin` (`id`,`username`,`email`,`password`,`created_at`,`updated_at`) VALUES (DEFAULT,'admin','chengli2023@foxmail.com','123456','2016-08-10 02:33:55','2016-08-10 02:33:55');
+[2016-08-10 10:33:56.000] [DEBUG] SQL - Executing (default): INSERT INTO `Role` (`id`,`rolename`,`roledesc`,`created_at`,`updated_at`) VALUES (DEFAULT,'超级管理员','超级管理员描述','2016-08-10 02:33:55','2016-08-10 02:33:55');
+[2016-08-10 10:33:56.012] [DEBUG] SQL - Executing (default): SELECT `created_at`, `updated_at`, `adminid_fk`, `roleid_fk` FROM `Admin_Role` AS `Admin_Role` WHERE `Admin_Role`.`adminid_fk` = 1 AND `Admin_Role`.`roleid_fk` IN (1);
+[2016-08-10 10:33:56.016] [DEBUG] SQL - Executing (default): INSERT INTO `Menu` (`id`,`name`,`parent`,`url`,`type`,`desc`,`order`,`icon`,`created_at`,`updated_at`) VALUES (DEFAULT,'搜索','0','/search','3','搜索页面',1,'asf','2016-08-10 02:33:56','2016-08-10 02:33:56');
+[2016-08-10 10:33:56.034] [DEBUG] SQL - Executing (default): INSERT INTO `Admin_Role` (`adminid_fk`,`roleid_fk`,`created_at`,`updated_at`) VALUES (1,1,'2016-08-10 02:33:56','2016-08-10 02:33:56');
+[2016-08-10 10:33:56.038] [ERROR] console - oooh, did you enter wrong database credentials?
+[2016-08-10 10:34:39.166] [DEBUG] SQL - Executing (default): INSERT INTO `Admin` (`id`,`username`,`email`,`password`,`created_at`,`updated_at`) VALUES (DEFAULT,'admin','chengli2023@foxmail.com','123456','2016-08-10 02:34:39','2016-08-10 02:34:39');
+[2016-08-10 10:34:39.175] [DEBUG] SQL - Executing (default): INSERT INTO `Role` (`id`,`rolename`,`roledesc`,`created_at`,`updated_at`) VALUES (DEFAULT,'超级管理员','超级管理员描述','2016-08-10 02:34:39','2016-08-10 02:34:39');
+[2016-08-10 10:34:39.186] [DEBUG] SQL - Executing (default): SELECT `created_at`, `updated_at`, `adminid_fk`, `roleid_fk` FROM `Admin_Role` AS `Admin_Role` WHERE `Admin_Role`.`adminid_fk` = 1 AND `Admin_Role`.`roleid_fk` IN (1);
+[2016-08-10 10:34:39.192] [DEBUG] SQL - Executing (default): INSERT INTO `Admin_Role` (`adminid_fk`,`roleid_fk`,`created_at`,`updated_at`) VALUES (1,1,'2016-08-10 02:34:39','2016-08-10 02:34:39');
+[2016-08-10 10:34:39.203] [DEBUG] SQL - Executing (default): INSERT INTO `Menu` (`id`,`name`,`parent`,`url`,`type`,`desc`,`order`,`icon`,`created_at`,`updated_at`) VALUES (DEFAULT,'搜索','0','/search','3','搜索页面',1,'asf','2016-08-10 02:34:39','2016-08-10 02:34:39');
+[2016-08-10 10:34:39.215] [ERROR] console - oooh, did you enter wrong database credentials?
+[2016-08-10 10:35:36.323] [DEBUG] SQL - Executing (default): INSERT INTO `Admin` (`id`,`username`,`email`,`password`,`created_at`,`updated_at`) VALUES (DEFAULT,'admin','chengli2023@foxmail.com','123456','2016-08-10 02:35:36','2016-08-10 02:35:36');
+[2016-08-10 10:35:36.332] [DEBUG] SQL - Executing (default): INSERT INTO `Role` (`id`,`rolename`,`roledesc`,`created_at`,`updated_at`) VALUES (DEFAULT,'超级管理员','超级管理员描述','2016-08-10 02:35:36','2016-08-10 02:35:36');
+[2016-08-10 10:35:36.342] [DEBUG] SQL - Executing (default): SELECT `created_at`, `updated_at`, `adminid_fk`, `roleid_fk` FROM `Admin_Role` AS `Admin_Role` WHERE `Admin_Role`.`adminid_fk` = 1 AND `Admin_Role`.`roleid_fk` IN (1);
+[2016-08-10 10:35:36.348] [DEBUG] SQL - Executing (default): INSERT INTO `Admin_Role` (`adminid_fk`,`roleid_fk`,`created_at`,`updated_at`) VALUES (1,1,'2016-08-10 02:35:36','2016-08-10 02:35:36');
+[2016-08-10 10:35:36.355] [DEBUG] SQL - Executing (default): INSERT INTO `Menu` (`id`,`name`,`parent`,`url`,`type`,`desc`,`order`,`icon`,`created_at`,`updated_at`) VALUES (DEFAULT,'搜索','0','/search','3','搜索页面',1,'asf','2016-08-10 02:35:36','2016-08-10 02:35:36');
+[2016-08-10 10:35:36.368] [ERROR] console - oooh, did you enter wrong database credentials?
+[2016-08-10 10:36:01.275] [DEBUG] SQL - Executing (default): INSERT INTO `Admin` (`id`,`username`,`email`,`password`,`created_at`,`updated_at`) VALUES (DEFAULT,'admin','chengli2023@foxmail.com','123456','2016-08-10 02:36:01','2016-08-10 02:36:01');
+[2016-08-10 10:36:01.289] [DEBUG] SQL - Executing (default): INSERT INTO `Role` (`id`,`rolename`,`roledesc`,`created_at`,`updated_at`) VALUES (DEFAULT,'超级管理员','超级管理员描述','2016-08-10 02:36:01','2016-08-10 02:36:01');
+[2016-08-10 10:36:01.302] [DEBUG] SQL - Executing (default): SELECT `created_at`, `updated_at`, `adminid_fk`, `roleid_fk` FROM `Admin_Role` AS `Admin_Role` WHERE `Admin_Role`.`adminid_fk` = 1 AND `Admin_Role`.`roleid_fk` IN (1);
+[2016-08-10 10:36:01.310] [DEBUG] SQL - Executing (default): INSERT INTO `Admin_Role` (`adminid_fk`,`roleid_fk`,`created_at`,`updated_at`) VALUES (1,1,'2016-08-10 02:36:01','2016-08-10 02:36:01');
+[2016-08-10 10:36:01.319] [DEBUG] SQL - Executing (default): INSERT INTO `Menu` (`id`,`name`,`parent`,`url`,`type`,`desc`,`order`,`icon`,`created_at`,`updated_at`) VALUES (DEFAULT,'搜索','0','/search','3','搜索页面',1,'asf','2016-08-10 02:36:01','2016-08-10 02:36:01');
+[2016-08-10 10:36:01.332] [ERROR] console - oooh, did you enter wrong database credentials?
+[2016-08-10 10:37:19.689] [DEBUG] SQL - Executing (default): INSERT INTO `Admin` (`id`,`username`,`email`,`password`,`created_at`,`updated_at`) VALUES (DEFAULT,'admin','chengli2023@foxmail.com','123456','2016-08-10 02:37:19','2016-08-10 02:37:19');
+[2016-08-10 10:37:19.701] [DEBUG] SQL - Executing (default): INSERT INTO `Role` (`id`,`rolename`,`roledesc`,`created_at`,`updated_at`) VALUES (DEFAULT,'超级管理员','超级管理员描述','2016-08-10 02:37:19','2016-08-10 02:37:19');
+[2016-08-10 10:37:19.717] [DEBUG] SQL - Executing (default): SELECT `created_at`, `updated_at`, `adminid_fk`, `roleid_fk` FROM `Admin_Role` AS `Admin_Role` WHERE `Admin_Role`.`adminid_fk` = 1 AND `Admin_Role`.`roleid_fk` IN (1);
+[2016-08-10 10:37:19.725] [DEBUG] SQL - Executing (default): INSERT INTO `Admin_Role` (`adminid_fk`,`roleid_fk`,`created_at`,`updated_at`) VALUES (1,1,'2016-08-10 02:37:19','2016-08-10 02:37:19');
+[2016-08-10 10:37:19.733] [DEBUG] SQL - Executing (default): INSERT INTO `Menu` (`id`,`name`,`parent`,`url`,`type`,`desc`,`order`,`icon`,`created_at`,`updated_at`) VALUES (DEFAULT,'搜索','0','/search','3','搜索页面',1,'asf','2016-08-10 02:37:19','2016-08-10 02:37:19');
+[2016-08-10 10:37:19.748] [ERROR] console - oooh, did you enter wrong database credentials?
+[2016-08-10 10:37:19.748] [INFO] console - { SequelizeDatabaseError: ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: 'asf' for column 'icon' at row 1
+    at Query.formatError (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/dialects/mysql/query.js:175:14)
+    at Query._callback (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/dialects/mysql/query.js:49:21)
+    at Query.Sequence.end (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/sequences/Sequence.js:85:24)
+    at Query.ErrorPacket (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/sequences/Query.js:94:8)
+    at Protocol._parsePacket (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Protocol.js:280:23)
+    at Parser.write (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Parser.js:74:12)
+    at Protocol.write (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Protocol.js:39:16)
+    at Socket.<anonymous> (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/Connection.js:109:28)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at readableAddChunk (_stream_readable.js:177:18)
+    at Socket.Readable.push (_stream_readable.js:135:10)
+    at TCP.onread (net.js:542:20)
+From previous event:
+    at Query.run (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/dialects/mysql/query.js:39:17)
+    at /Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/sequelize.js:843:20
+    at /Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/index.js:38:21
+    at retryAsPromised (/Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/index.js:27:10)
+    at /Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/sequelize.js:842:12
+From previous event:
+    at Promise.then (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/promise.js:21:17)
+    at next (/Users/licheng/Documents/licheng/nodehill/node_modules/co/index.js:100:51)
+    at onFulfilled (/Users/licheng/Documents/licheng/nodehill/node_modules/co/index.js:69:7)
+    at /Users/licheng/Documents/licheng/nodehill/node_modules/co/index.js:54:5
+    at co (/Users/licheng/Documents/licheng/nodehill/node_modules/co/index.js:50:10)
+    at Object.<anonymous> (/Users/licheng/Documents/licheng/nodehill/core/models/dbInit.js:21:1)
+    at Module._compile (module.js:541:32)
+    at Object.Module._extensions..js (module.js:550:10)
+    at Module.load (module.js:458:32)
+    at tryModuleLoad (module.js:417:12)
+    at Function.Module._load (module.js:409:3)
+    at Module.require (module.js:468:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/Users/licheng/Documents/licheng/nodehill/core/config/appSetting.js:20:1)
+    at Module._compile (module.js:541:32)
+    at Object.Module._extensions..js (module.js:550:10)
+    at Module.load (module.js:458:32)
+    at tryModuleLoad (module.js:417:12)
+    at Function.Module._load (module.js:409:3)
+    at Module.require (module.js:468:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/Users/licheng/Documents/licheng/nodehill/app.js:10:1)
+    at Module._compile (module.js:541:32)
+    at Object.Module._extensions..js (module.js:550:10)
+    at Module.load (module.js:458:32)
+  name: 'SequelizeDatabaseError',
+  message: 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: \'asf\' for column \'icon\' at row 1',
+  parent: 
+   { Error: ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: 'asf' for column 'icon' at row 1
+       at Query.Sequence._packetToError (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/sequences/Sequence.js:51:14)
+       at Query.ErrorPacket (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/sequences/Query.js:83:18)
+       at Protocol._parsePacket (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Protocol.js:280:23)
+       at Parser.write (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Parser.js:74:12)
+       at Protocol.write (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Protocol.js:39:16)
+       at Socket.<anonymous> (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/Connection.js:109:28)
+       at emitOne (events.js:96:13)
+       at Socket.emit (events.js:188:7)
+       at readableAddChunk (_stream_readable.js:177:18)
+       at Socket.Readable.push (_stream_readable.js:135:10)
+       at TCP.onread (net.js:542:20)
+       --------------------
+       at Protocol._enqueue (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Protocol.js:141:48)
+       at Connection.query (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/Connection.js:214:25)
+       at /Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/dialects/mysql/query.js:40:21
+       at Promise._execute (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/debuggability.js:272:9)
+       at Promise._resolveFromExecutor (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:475:18)
+       at new Promise (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:77:14)
+       at Query.run (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/dialects/mysql/query.js:39:17)
+       at /Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/sequelize.js:843:20
+       at /Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/index.js:38:21
+       at Promise._execute (/Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/node_modules/bluebird/js/release/debuggability.js:272:9)
+       at Promise._resolveFromExecutor (/Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/node_modules/bluebird/js/release/promise.js:475:18)
+       at new Promise (/Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/node_modules/bluebird/js/release/promise.js:77:14)
+       at retryAsPromised (/Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/index.js:27:10)
+       at /Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/sequelize.js:842:12
+       at tryCatcher (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/util.js:16:23)
+       at Promise._settlePromiseFromHandler (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:504:31)
+       at Promise._settlePromise (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:561:18)
+       at Promise._settlePromise0 (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:606:10)
+       at Promise._settlePromises (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:685:18)
+       at Async._drainQueue (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/async.js:138:16)
+       at Async._drainQueues (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/async.js:148:10)
+       at Immediate.Async.drainQueues (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/async.js:17:14)
+     code: 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD',
+     errno: 1366,
+     sqlState: 'HY000',
+     index: 0,
+     sql: 'INSERT INTO `Menu` (`id`,`name`,`parent`,`url`,`type`,`desc`,`order`,`icon`,`created_at`,`updated_at`) VALUES (DEFAULT,\'搜索\',\'0\',\'/search\',\'3\',\'搜索页面\',1,\'asf\',\'2016-08-10 02:37:19\',\'2016-08-10 02:37:19\');' },
+  original: 
+   { Error: ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: 'asf' for column 'icon' at row 1
+       at Query.Sequence._packetToError (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/sequences/Sequence.js:51:14)
+       at Query.ErrorPacket (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/sequences/Query.js:83:18)
+       at Protocol._parsePacket (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Protocol.js:280:23)
+       at Parser.write (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Parser.js:74:12)
+       at Protocol.write (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Protocol.js:39:16)
+       at Socket.<anonymous> (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/Connection.js:109:28)
+       at emitOne (events.js:96:13)
+       at Socket.emit (events.js:188:7)
+       at readableAddChunk (_stream_readable.js:177:18)
+       at Socket.Readable.push (_stream_readable.js:135:10)
+       at TCP.onread (net.js:542:20)
+       --------------------
+       at Protocol._enqueue (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/protocol/Protocol.js:141:48)
+       at Connection.query (/Users/licheng/Documents/licheng/nodehill/node_modules/mysql/lib/Connection.js:214:25)
+       at /Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/dialects/mysql/query.js:40:21
+       at Promise._execute (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/debuggability.js:272:9)
+       at Promise._resolveFromExecutor (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:475:18)
+       at new Promise (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:77:14)
+       at Query.run (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/dialects/mysql/query.js:39:17)
+       at /Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/sequelize.js:843:20
+       at /Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/index.js:38:21
+       at Promise._execute (/Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/node_modules/bluebird/js/release/debuggability.js:272:9)
+       at Promise._resolveFromExecutor (/Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/node_modules/bluebird/js/release/promise.js:475:18)
+       at new Promise (/Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/node_modules/bluebird/js/release/promise.js:77:14)
+       at retryAsPromised (/Users/licheng/Documents/licheng/nodehill/node_modules/retry-as-promised/index.js:27:10)
+       at /Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/lib/sequelize.js:842:12
+       at tryCatcher (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/util.js:16:23)
+       at Promise._settlePromiseFromHandler (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:504:31)
+       at Promise._settlePromise (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:561:18)
+       at Promise._settlePromise0 (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:606:10)
+       at Promise._settlePromises (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/promise.js:685:18)
+       at Async._drainQueue (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/async.js:138:16)
+       at Async._drainQueues (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/async.js:148:10)
+       at Immediate.Async.drainQueues (/Users/licheng/Documents/licheng/nodehill/node_modules/sequelize/node_modules/bluebird/js/release/async.js:17:14)
+     code: 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD',
+     errno: 1366,
+     sqlState: 'HY000',
+     index: 0,
+     sql: 'INSERT INTO `Menu` (`id`,`name`,`parent`,`url`,`type`,`desc`,`order`,`icon`,`created_at`,`updated_at`) VALUES (DEFAULT,\'搜索\',\'0\',\'/search\',\'3\',\'搜索页面\',1,\'asf\',\'2016-08-10 02:37:19\',\'2016-08-10 02:37:19\');' },
+  sql: 'INSERT INTO `Menu` (`id`,`name`,`parent`,`url`,`type`,`desc`,`order`,`icon`,`created_at`,`updated_at`) VALUES (DEFAULT,\'搜索\',\'0\',\'/search\',\'3\',\'搜索页面\',1,\'asf\',\'2016-08-10 02:37:19\',\'2016-08-10 02:37:19\');' }

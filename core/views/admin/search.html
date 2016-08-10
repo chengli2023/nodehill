@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>执行研判</title>
+    <link rel='stylesheet' href='/public/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+    <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/javascripts/layer-v2.4/layer/layer.js"></script>
+    <script src="/public/javascripts/echarts.js"></script>
+
+    <style>
+
+    </style>
+</head>
+<body style="">
+    <div style="width: 1024px; margin: auto">
+        <% include ./include/header.html %>
+        <div class="main-container">
+            <% include ./include/menu.html %>
+            <div style="width: 780px; float: right">
+                <div style="width:500px;margin: auto;margin-top: 50px; ">
+                    <input type="text" style="height: 34px; width: 400px; border: 1px solid red " >
+                    <img src="/public/images/search-bt.gif" onclick="javascript:location.href='/searchResult'"/>
+                </div>
+                <div style="width:500px;margin: auto;margin-top:20px; font-size: 16px; color: #979797 ">
+                    1.支持模糊查询<br>
+                    2.可输入姓名,身份证号,手机号<br><br>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <% include ./include/footer.html %>
+    </div>
+
+    <script>
+        $("#loginBt").hover(function(){
+            this.src="/public/images/login-bt-red.png"
+        },function(){
+            this.src="/public/images/login-bt-active.png"
+        });
+        $("#forgetBt").hover(function(){
+            this.src="/public/images/forget-bt-active.gif"
+        },function(){
+            this.src="/public/images/orget-bt-grep.gif"
+        });
+        var isRemember = false;
+        $("#rememberBt").click(function(){
+            if(isRemember) {
+                isRemember=false;
+                $(this).toggleClass("remember-active")
+            }else{
+                isRemember=true;
+                $(this).toggleClass("remember-active")
+            }
+        });
+
+        $(function(){
+            this.src=isRemember?"/public/images/remember-bt-active.gif":"/public/images/remember-bt-grey.gif";
+        })
+    </script>
+
+
+</body>
+</html>

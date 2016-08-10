@@ -1,0 +1,218 @@
+﻿<%var peopleId = req.query['peopleId']%>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>执行研判</title>
+    <link rel='stylesheet' href='/public/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+    <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/javascripts/layer-v2.4/layer/layer.js"></script>
+    <script src="/public/javascripts/echarts.js"></script>
+
+    <style>
+    </style>
+</head>
+<body style="">
+<div style="width: 1024px; margin: auto">
+    <div style=" height:148px;background:url(/public/images/main-bg.jpg) no-repeat">
+        <div class="signout">
+            <ul>
+                <li>管理员:admin</li>
+                <li style="float: right"><a href="/login" style="color: #ffffff">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="fk_searchBox">
+            <input type="text" style="height: 34px; width: 400px; border: 1px solid red ">
+            <img src="/public/images/search-bt.gif" onclick="javascript:location.href='/searchResult'"/>
+        </div>
+        <div style="clear: both"></div>
+        <div class="fk_main">
+            <% include ./include/menu.html %>
+            <div class="profileBody">
+                <div class="profileTabBar">
+                    <div class="profileTabTile">
+                        <a href="/profile?peopleId=<%=peopleId%>">个人信息</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/sheaninfo?peopleId=<%=peopleId%>">涉案信息</a>
+                    </div>
+                    <div class="profileTabTile active">
+                        <a href="/zichanAnalyze?peopleId=<%=peopleId%>">资产分析</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/guijiAnalyze?peopleId=<%=peopleId%>">轨迹分析</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/xiaofeiAnalyze?peopleId=<%=peopleId%>">消费分析</a>
+                    </div>
+                    <div class="profileTabTile ">
+                        <a href="/renmaiAnalyze?peopleId=<%=peopleId%>">人脉分析</a>
+                    </div>
+                </div>
+                <div class="tabunderline"></div>
+                <div style="padding: 10px 10px">
+                    <div id="dongchantu" style="width: 750px;height:400px;"></div>
+                    <hr>
+                    <div id="budongchantu" style="width: 750px;height:400px;"></div>
+                    <hr>
+                    <div id="fangchantu" style="width: 750px;height:400px;"></div>
+                    <script>
+                        var myChart_dongchan = echarts.init(document.getElementById('dongchantu'));
+                        dongchan_option = {
+                            title : {
+                                text: '动产分析',
+                                subtext: '车辆-资产总计：160.87万',
+                                x:'center'
+                            },
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                                data: ['奥迪A4L 2016款',
+                                    '帕萨特 2016款',
+                                    '宝马7系 2016款']
+                            },
+                            series : [
+                                {
+                                    name: '动产来源',
+                                    type: 'pie',
+                                    radius : '55%',
+                                    center: ['50%', '60%'],
+                                    data:[
+                                        {value:335, name:'奥迪A4L 2016款'},
+                                        {value:310, name:'帕萨特 2016款'},
+                                        {value:234, name:'宝马7系 2016款'}
+                                    ],
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+
+                        myChart_dongchan.setOption(dongchan_option);
+
+                        var myChart_budongchan = echarts.init(document.getElementById('budongchantu'));
+                        budongchan_option = {
+                            title : {
+                                text: '动产分析',
+                                subtext: '存款-资产总计：1450万',
+                                x:'center'
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b}: {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x: 'left',
+                                data:['中国工商银行','中国建设银行','中国银行','其它理财产品']
+                            },
+                            series: [
+                                {
+                                    name:'不动产来源',
+                                    type:'pie',
+                                    radius: ['50%', '70%'],
+                                    avoidLabelOverlap: false,
+                                    label: {
+                                        normal: {
+                                            show: false,
+                                            position: 'center'
+                                        },
+                                        emphasis: {
+                                            show: true,
+                                            textStyle: {
+                                                fontSize: '30',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    labelLine: {
+                                        normal: {
+                                            show: false
+                                        }
+                                    },
+                                    data:[
+                                        {value:335, name:'中国工商银行'},
+                                        {value:310, name:'中国建设银行'},
+                                        {value:234, name:'其它理财产品'}
+                                    ]
+                                }
+                            ]
+                        };
+
+                        myChart_budongchan.setOption(budongchan_option);
+
+                        var myChart_fangchan = echarts.init(document.getElementById('fangchantu'));
+                        fangchan_option = {
+                            title : {
+                                text: '不动产分析',
+                                subtext: '不动产资产总计：1450万',
+                                x:'center'
+                            },
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                                data: ['杭州江干区-景芳小区景芳六区',
+                                    '南京市浦口区桥北天润城12-14街区',
+                                    '上海市浦东新区塘桥南泉小区',
+                                    '成都市青羊区金沙中大君悦金沙四期',
+                                    '北京市西城区广安门远见名苑']
+                            },
+                            series : [
+                                {
+                                    name: '不动产来源',
+                                    type: 'pie',
+                                    radius : '55%',
+                                    center: ['50%', '60%'],
+                                    data:[
+                                        {value:335, name:'杭州江干区-景芳小区景芳六区'},
+                                        {value:310, name:'南京市浦口区桥北天润城12-14街区'},
+                                        {value:234, name:'上海市浦东新区塘桥南泉小区'},
+                                        {value:234, name:'成都市青羊区金沙中大君悦金沙四期'},
+                                        {value:234, name:'北京市西城区广安门远见名苑'}
+                                    ],
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+
+                        myChart_fangchan.setOption(fangchan_option);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <% include ./include/footer.html %>
+</div>
+
+<script>
+
+</script>
+
+
+</body>
+</html>

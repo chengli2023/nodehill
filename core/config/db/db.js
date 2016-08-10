@@ -2,11 +2,12 @@
 //DB config
 var Sequelize = require('sequelize')
 var logger = require('log4js').getLogger('SQL');
+var exports = module.exports = null;
 
-var exports = module.exports =new Sequelize('good1', null,null, {
+var exports = module.exports =new Sequelize('nodehill', 'root','root', {
     host: 'localhost',
     //dialect: 'mysql'|'sqlite'|'postgres'|'mssql',
-    dialect: 'sqlite',
+    dialect: 'mysql',
 
     pool: {
         max: 5,
@@ -15,7 +16,7 @@ var exports = module.exports =new Sequelize('good1', null,null, {
     },
 
     // SQLite only
-    storage: 'sqlite_db/good1.db',
+    //storage: 'sqlite_db/good1.db',
     logging:logger.debug.bind(logger)
 });
 

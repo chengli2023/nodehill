@@ -42,9 +42,8 @@ ul li {
 
 a {
   text-decoration: none;
-  color: #cccccc
+  color: #ffffff
 }
-
 .topul-welcome {
   width: 300px;
   float: left;
@@ -324,3 +323,88 @@ a {
 .tcdPageCode span.current{display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;color: #fff;background-color: #428bca;	border: 1px solid #428bca;border-radius: 4px;vertical-align: middle;}
 .tcdPageCode span.disabled{	display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;border-radius: 4px;vertical-align: middle;}
 /*分页结束*/
+
+.search-button{cursor:pointer;width: 81px; height: 34px; border: 0}
+.profile-conclusion{height:40px; padding: 0px 10px; background:red; line-height:40px;font-size: 16px; color: #fff}
+.profileTabTile{
+  float: left;margin-right:10px;width: 100px; height: 40px; background: #cccccc; color: #ffffff; font-size: 16px;line-height: 40px; text-align: center}
+.profileTabTile.active{background: red;color: #ffffff}
+.profileTabTile.active a{color: #ffffff}
+.profileTabBar{height:40px;}
+.profileBody{width: 780px; float: right}
+.tabunderline{background: red; height: 3px;}
+
+
+.remember{float: left; height:54px; width:124px;background-image: url(/public/images/remember-bt-grey.gif)}
+.remember-active{background-image: url(/public/images/remember-bt-active.gif)}
+.signout {
+  margin-top: 60px;
+  float: right;
+  height: 40px;
+  width: 250px;
+  background: red
+}
+
+.signout ul {
+  padding: 0px 25px;
+  line-height: 40px;
+}
+
+.signout ul li {
+  float: left;
+  font-size: 16px;
+  font-weight: bolder;
+  color: #ffffff
+}
+
+.menu-out-box {
+  width: 200px;
+  float: left;
+  border: 1px solid red;
+  min-height: 600px;
+}
+
+.menu-out-box ul {
+  width: 165px;
+  margin: auto;
+  padding: 5px 15px 0px 0px
+}
+
+.menu-out-box ul li {
+  margin: 10px 0;
+  color: #ffffff;
+  line-height: 29px;
+  text-align: center;
+  font-size: 16px;
+  width: 165px;
+  height: 29px;
+  background: url(/public/images/menu-bt.gif)
+}
+
+.menu-out-box ul ul {
+  margin: 0;
+  padding: 0px;
+}
+
+.menu-out-box ul ul li {
+  margin-top: 10px;
+  background: #fff;
+  color: #000000
+}
+
+.main-container {
+  margin-top: 20px;
+  background: #ffffff;
+}
+
+.footer {
+  height: 50px;
+  background: #cccccc;
+  margin-top: 10px;
+  background:url(/public/images/main-bg.jpg) 0px -600px no-repeat;
+  text-align: center;
+  font-size: 16px;line-height: 50px;
+  color: #cccccc;
+}
+.fk_searchBox{float: right}
+.fk_main{margin-top: 20px;}

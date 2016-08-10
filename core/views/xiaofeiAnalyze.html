@@ -1,0 +1,209 @@
+﻿<%var peopleId = req.query['peopleId']%>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>执行研判</title>
+    <link rel='stylesheet' href='/public/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+    <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/javascripts/layer-v2.4/layer/layer.js"></script>
+    <script src="/public/javascripts/echarts.js"></script>
+
+    <style>
+
+    </style>
+</head>
+<body style="">
+<div style="width: 1024px; margin: auto">
+    <div style=" height:148px;background:url(/public/images/main-bg.jpg) no-repeat">
+        <div class="signout">
+            <ul>
+                <li>管理员:admin</li>
+                <li style="float: right"><a href="/login" style="color: #ffffff">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="fk_searchBox">
+            <input type="text" style="height: 34px; width: 400px; border: 1px solid red ">
+            <img src="/public/images/search-bt.gif" onclick="javascript:location.href='/searchResult'"/>
+        </div>
+        <div style="clear: both"></div>
+        <div class="fk_main">
+            <% include ./include/menu.html %>
+            <div class="profileBody">
+                <div class="profileTabBar">
+                    <div class="profileTabTile">
+                        <a href="/profile?peopleId=<%=peopleId%>">个人信息</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/sheaninfo?peopleId=<%=peopleId%>">涉案信息</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/zichanAnalyze?peopleId=<%=peopleId%>">资产分析</a>
+                    </div>
+                    <div class="profileTabTile">
+                        <a href="/guijiAnalyze?peopleId=<%=peopleId%>">轨迹分析</a>
+                    </div>
+                    <div class="profileTabTile active">
+                        <a href="/xiaofeiAnalyze?peopleId=<%=peopleId%>">消费分析</a>
+                    </div>
+                    <div class="profileTabTile ">
+                        <a href="/renmaiAnalyze?peopleId=<%=peopleId%>">人脉分析</a>
+                    </div>
+                </div>
+                <div class="tabunderline"></div>
+                <div style="padding: 10px 10px">
+                    <div id="xiaofeitu" style="width: 750px;height:400px;"></div>
+                    <div id="daxiaofeitu" style="width: 750px;height:400px;"></div>
+                    <div style="width: 730px; margin: auto">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>类型</th>
+                                <th>金额</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>2016-1-13 10:09:00</td>
+                                <td>浙江省杭州市江干区华晨宝马4S店</td>
+                                <td>刷卡消费 （中国银行6226090950502114）</td>
+                                <td>4,500,000</td>
+                            </tr>
+                            <tr>
+                                <td>2016-2-23 18:30:00</td>
+                                <td>江苏省南京市翠屏房地产开发有限公司</td>
+                                <td>刷卡消费 （中国工商银行6225090950502852）</td>
+                                <td>1,020,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2016-8-13 14:09:00</td>
+                                <td>北京市王府井百货商店</td>
+                                <td>刷卡消费 （中国银行6224090950500009）</td>
+                                <td>20,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2016-8-15 14:09:00</td>
+                                <td>北京市东城区希尔顿酒店</td>
+                                <td>刷卡消费 （中国银行6224090950500009）</td>
+                                <td>7,400.00</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <script>
+                        var myChart_xiaofeitu = echarts.init(document.getElementById('xiaofeitu'));
+
+                        xiaofeitu_option = {
+                            title : {
+                                text: '2015年消费分析',
+                                subtext: '',
+                                x:'center'
+                            },
+                            color: ['#3398DB'],
+                            tooltip : {
+                                trigger: 'axis',
+                                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ['一月', '二月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月'],
+                                    axisTick: {
+                                        alignWithLabel: true
+                                    }
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            series : [
+                                {
+                                    name:'总消费',
+                                    type:'bar',
+                                    barWidth: '60%',
+                                    data:[10, 52, 200, 200,390, 330, 220, 52,160, 334, 10,390]
+                                }
+                            ]
+                        };
+
+                        myChart_xiaofeitu.setOption(xiaofeitu_option);
+
+                        var myChart_daxiaofeitu = echarts.init(document.getElementById('daxiaofeitu'));
+
+                        daxiaofeitu_option = {
+                            title : {
+                                text: '近2年大消费情况',
+                                subtext: '',
+                                x:'center'
+                            },
+                            color: ['#3398DB'],
+                            tooltip : {
+                                trigger: 'axis',
+                                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ['2015-1-13', '2015-2-23', '2016-3-13', '2016-6-15'],
+                                    axisTick: {
+                                        alignWithLabel: true
+                                    }
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            series : [
+                                {
+                                    name:'总消费',
+                                    type:'bar',
+                                    barWidth: '60%',
+                                    data:[45000, 10200, 20000, 20090]
+                                }
+                            ]
+                        };
+
+                        myChart_daxiaofeitu.setOption(daxiaofeitu_option);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <% include ./include/footer.html %>
+</div>
+
+<script>
+
+</script>
+
+
+</body>
+</html>
