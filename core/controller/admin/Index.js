@@ -1,6 +1,4 @@
-var express = require('express');
 
-var router = express.Router();
 var path = require('path');
 var utils = require('../../../lib/utils');
 var crypto = require('crypto');
@@ -12,11 +10,21 @@ var db = require('../../config/db/db')
 var utilsController = require('./utils')
 var adminService = require('../../service/admin/admin')
 
-router.$requestMapping = '/admin';
-router.get('/login', function (req, res, next) {
+exports = module.exports = function(handle){
+    //var opts = options || {};
+    function handler(req,res,next){
+        handler._req = req;
+        handler._res = res;
+        handler._next = next;
+        handle.bind(handler)(req,res,next);
+    }
+    handler.__proto__ = exports;
+    return handler;
+};
+exports.loginGet = function (req, res, next) {
     res.render('admin/login', {});
-});
-router.post('/login', function (req, res, next) {
+}
+exports.loginPost = function (req, res, next) {
     let username = req.body['username']
     let password = req.body['password']
 
@@ -34,11 +42,14 @@ router.post('/login', function (req, res, next) {
     }).catch(function(e){
         next(e)
     });
-});
-router.get('/logout', function (req, res, next) {
+}
+exports.logoutGet = function (req, res, next) {
     utilsController.clearAdminLoginSession(req)
-});
-router.get('/search', function (req, res, next) {
+    res.redirect('/admin/login')
+}
+exports.searchGet = function (req, res, next) {
     res.render4admin('admin/search', {req});
-});
-module.exports = router;
+}
+exports.resGet = function (req, res, next) {
+    res.render4admin('admin/res', {req});
+}

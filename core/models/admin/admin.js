@@ -22,9 +22,18 @@ exports = module.exports = db.define('Admin', {
     });
 
 //Example
-exports.findAllBuyList = function* ({limit=300,offset=0}) {
-    var sql = 'select dd.*,goodid2name.goodname goodname,useridname.username from (select usergood.user userid, usergood.good goodid from usergood group by userid limit 300 offset 0 ) as dd,goodid2name,useridname where goodid2name.goodid=dd.goodid and useridname.userid =dd.userid';
-    let result = yield db.query(sql,{replacements: [limit,offset],type: sequelize.QueryTypes.SELECT});
-    return result
+exports.findAllMenus = function* ({rootid=0,roleids = []}) {
+    let pidwhere = '';
+    roleids = roleids.join(',')
+    if(rootid != -1){
+        pidwhere = 'and m.pid=' + rootid;
+    }else{
+        pidwhere = '';
+    }
+
+    var sql = 'select distinct m.name, m.* from (select menu.*,menu_templst.nlevel,menu_templst.scort from menu_templst,menu where menu_templst.id = menu.id ) as m,Role_Menu as r where m.id = r.menuid_fk '+pidwhere+ 'and m.restype != ? and FIND_IN_SET(r.roleid_fk,?) order by m.scort';
+    let results = yield db.query(sql,{replacements: [3,roleids],model:exports,type: Sequelize.QueryTypes.SELECT});
+    return results
 };
+
 

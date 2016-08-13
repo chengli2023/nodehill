@@ -50,10 +50,10 @@ module.exports = function (app) {
     //后台系统-权限控制
     app.use('/admin',authorization({
         escapeACL:[
-            '/login',
-            '/logout',
-            '/forget',
-            '/verifyCode'
+            '/admin/login',
+            '/admin/logout',
+            '/admin/forget',
+            '/admin/verifyCode'
         ]
     }));
 
@@ -64,6 +64,7 @@ module.exports = function (app) {
                 let commonData= yield utilsController.getCommonData(req)
                 options.commonData = commonData;
                 res.render(name, options, callback)
+
             }).catch(function(e){
                 next(e)
             });
@@ -73,7 +74,7 @@ module.exports = function (app) {
 
 
     //Application router
-    var controllerDir = path.join(__dirname, '../controller/');
+    var controllerDir = path.join(__dirname, '../router/');
 
     loadRouter = (controllerDir) =>{
         fs.readdirSync(controllerDir).forEach(function (file) {

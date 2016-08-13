@@ -5,13 +5,13 @@ exports = module.exports = db.define('Menu', {
         name: {
             type: Sequelize.STRING(25)
         },
-        parent:{
+        pid:{
             type: Sequelize.INTEGER
         },
         url: {
             type: Sequelize.STRING(255)
         },
-        type:{
+        restype:{
             type: Sequelize.INTEGER
         },
         desc:{
@@ -22,6 +22,9 @@ exports = module.exports = db.define('Menu', {
         },
         icon:{
             type: Sequelize.INTEGER
+        },
+        nlevel:{
+            type: Sequelize.VIRTUAL
         }
     },{
         freezeTableName: true,//禁用sequelize的表面自动转换功能

@@ -1,15 +1,46 @@
-<%var peopleId = req.query['peopleId']%>
-<div class="menu-out-box">
-    <ul>
-        <li>执行分析</li>
-        <ul>
-            <li><a href="<%if(!isNaN(peopleId)){%>/sheaninfo?peopleId=<%=peopleId%><%}else{%>#<%}%>">涉案信息</a></li>
-            <li><a href="<%if(!isNaN(peopleId)){%>/zichanAnalyze?peopleId=<%=peopleId%><%}else{%>#<%}%>">资产分析</a></li>
-            <li><a href="<%if(!isNaN(peopleId)){%>/guijiAnalyze?peopleId=<%=peopleId%><%}else{%>#<%}%>">轨迹分析</a></li>
-            <li><a href="<%if(!isNaN(peopleId)){%>/xiaofeiAnalyze?peopleId=<%=peopleId%><%}else{%>#<%}%>">消费分析</a></li>
-        </ul>
-        <li>告警设置</li>
-        <li>系统设置</li>
-    </ul>
+<%
+var peopleId = req.query['peopleId']
+var menus = commonData.menus
+var active = '系统设置'
+%>
 
-</div>
+
+
+<div class="left-nav">
+    <ul>
+        <%
+            for(let i = 0; i< menus.length; i ++){
+            let menuObj = menus[i];
+            let currLevel = menuObj.get('nlevel')
+        %>
+        <%if(menuObj.get('nlevel') == 0){%>
+            <%if(menuObj.get('restype') == 1){%>
+                <li <%if(active == menuObj.get('name')){%>class="active"<%}%>>
+                    <div class="nav-title">
+                        <span class="pull-right icon-dropdown"></span>
+                        <div class="desktop-chart">
+                            <i class="icon-desktop"></i>
+                            <i class="icon-bar-chart"></i>
+                        </div>
+                        <%=menuObj.get('name')%>
+                    </div>
+
+                    <ul>
+                        <%
+                            for(let j = i+1; j< menus.length; j ++){
+                            let menuObj = menus[j];
+                        %>
+                            <%if(menuObj.get('nlevel') == currLevel+1) {%>
+                                <li><a href="<%if(menuObj.get('url')){%><%=menuObj.get('url')%><%}else{%>#<%}%>"><%=menuObj.get('name')%></a></li>
+                            <%}else if(menuObj.get('nlevel') == currLevel){
+                                i = j-1
+                                break;
+                            }%>
+                        <%}%>
+                    </ul>
+                </li>
+            <%}%>
+        <%}
+        }%>
+    </ul>
+</div><!-- left-nav -->

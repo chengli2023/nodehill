@@ -1,6 +1,4 @@
-var express = require('express');
 
-var router = express.Router();
 var path = require('path');
 var utils = require('../../lib/utils');
 var crypto = require('crypto');
@@ -12,10 +10,20 @@ var AllModel = require('../models/AllModel')
 var ProfileModel = require('../models/ProfileModel')
 var db = require('../config/db/db')
 
-router.$requestMapping = '/';
-router.get('/', function (req, res, next) {
+exports = module.exports = function(handle){
+    //var opts = options || {};
+    function handler(req,res,next){
+        handler._req = req;
+        handler._res = res;
+        handler._next = next;
+        handle.bind(handler)(req,res,next);
+    }
+    handler.__proto__ = exports;
+    return handler;
+};
+exports.index = function(req, res, next) {
     res.redirect('/admin/search')
-});
+};
 /*
 router.get('/', function (req, res, next) {
     res.redirect('/login')
@@ -86,4 +94,3 @@ router.get('/sheaninfo', function (req, res, next) {
 });
 */
 
-module.exports = router;

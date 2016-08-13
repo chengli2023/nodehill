@@ -11,6 +11,7 @@ var db = require('../../config/db/db')
 var adminService = require('../../service/admin/admin')
 var adminModel = require('../../models/admin/Admin')
 var roleModel = require('../../models/admin/Role')
+var menuModel = require('../../models/admin/Menu')
 
 
 exports.isLogin4Admin = (req) =>{
@@ -36,18 +37,33 @@ exports.getAdminSession =(req)=> {
 }
 
 exports.getCommonData =function*(req) {
+    let currRole = yield this.getCurrRole(req)
+    
+    let menus = yield adminModel.findAllMenus({rootid:-1,roleids:currRole.roleids})
+    return{
+        username:currRole.username,
+        rolenames:currRole.rolenames.join(','),
+        menus:menus
+    }
+
+}
+exports.getCurrRole =function*(req) {
     let adminObj = yield adminModel.findOne({
         where:{id:this.getAdminSession(req).id},
-        include: [{model: roleModel}]
+        include: [{
+            model: roleModel
+        }]
     })
     let username = adminObj.username
-    let rolenames = [];
+    let rolenames = [],
+        roleids = [];
     adminObj.Roles.forEach((role)=>{
         rolenames.push(role.rolename)
+        roleids.push(role.id)
     })
     return{
         username:username,
-        rolenames:rolenames.join(',')
+        rolenames:rolenames,
+        roleids:roleids
     }
-
-}.bind(exports)
+}

@@ -59,7 +59,7 @@ exports.handle = function(req,res,next){
 
 };
 exports.reqPath=function(){
-    return this.moveUrlEndSlash(this._req.path)
+    return this.moveUrlEndSlash(this._req._parsedUrl.pathname)
 
 }
 exports.moveUrlEndSlash = (path)=>{

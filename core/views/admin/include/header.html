@@ -1,5 +1,16 @@
-<div style=" height:148px;background:url(/public/images/main-bg.jpg) no-repeat">
-    <div class="signout">
-        <ul><li><%=commonData.rolenames%>:<%=commonData.username%></li><li style="float: right"><a href="/admin/logout">退出</a></li></ul>
+<div class="blue-bg">
+    <div class="index-header">
+        <img src="/public/images/logo1.png" />
+        <div class="pull-right">
+            <div class="header-info">
+                <p><%=commonData.username%> hello(<%=commonData.rolenames%>)</p>
+                <div>现时间：<span id="now-time">2016年02月20日</span></div>
+            </div>
+            <div class="line-gap"></div>
+            <a href="/admin/logout">
+                <i class="icon-off"></i>
+            </a>
+        </div>
+
     </div>
-</div>
+</div><!-- blue-bg -->
