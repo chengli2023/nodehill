@@ -39,7 +39,7 @@ exports.getAdminSession =(req)=> {
 exports.getCommonData =function*(req) {
     let currRole = yield this.getCurrRole(req)
     
-    let menus = yield adminModel.findAllMenus({rootid:-1,roleids:currRole.roleids})
+    let menus = yield menuModel.findAllMenus({roleids:currRole.roleids,restype:[1,2]})
     return{
         username:currRole.username,
         rolenames:currRole.rolenames.join(','),

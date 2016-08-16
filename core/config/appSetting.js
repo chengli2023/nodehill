@@ -53,7 +53,9 @@ module.exports = function (app) {
             '/admin/login',
             '/admin/logout',
             '/admin/forget',
-            '/admin/verifyCode'
+            '/admin/verifyCode',
+            '/admin/sys/res/checkSameLevelOrder',
+            '/admin/sys/role/checkSameName'
         ]
     }));
 

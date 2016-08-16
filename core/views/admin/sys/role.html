@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>资源管理</title>
+        <meta name="description" content="无锡">
+        <meta name="viewport" content="width=1200">
+		<link rel="shortcut icon" href="/public/images/favicon.png">
+		<link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+		<link rel="stylesheet" href="/public/bower_components/components-font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/public/stylesheets/main.css">
+		<script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
+		<script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="/public/javascripts/common.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<% include ../include/header.html %>
+			<div class="index-container">
+				<% include ../include/menu.html %>
+				<div class="search-box gap-lr text-right">
+					<input type="text" placeholder="模糊查询"> 
+					<a href="list.html" class="btn btn-primary">搜索</a>
+				</div>
+				<ul class="nav-bar">
+					<li class="active"><a>角色管理</a></li>
+				</ul>
+				<div class="gap">
+					<button class="btn btn-primary pull-right"  data-toggle="modal" data-target="#addModal" title="添加">
+						<span class="fa fa-plus"></span>
+					</button>
+
+					<br>
+					<table class="table table-bordered table-hover">
+						<thead>
+						<tr>
+							<th width="15%">名称</th>
+							<th width="5%">描述</th>
+							<th width="10%">操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						<%for(let i = 0;i < roleObjs.length; i++){
+							let roleObj = roleObjs[i]
+						%>
+							<tr id="">
+								<td><%=roleObj.rolename%></td>
+								<td><%=roleObj.roledesc%></td>
+								<td>
+									<button class="btn btn-primary" title="编辑">
+										<i class="fa fa-edit"></i>
+									</button>
+									<button type="button" class="btn btn-danger" title="删除" onclick="delRole(<%=roleObj.id%>)">
+										<i class="fa fa-trash"></i>
+									</button>
+									<button type="button" class="btn btn-info" onclick="openAcl(<%=roleObj.id%>)" title="权限配置">
+										<i class="fa fa-edit"></i>权限配置
+									</button>
+								</td>
+							</tr>
+						<%}%>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+			<div class="push"></div>
+		</div>
+		<% include ../include/footer.html %>
+		<div class="modal fade" role="dialog" id="addModal" data-backdrop="static" aria-labelledby="gridSystemModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">添加角色</h4>
+					</div>
+					<form class="form-horizontal"  method="post" id="addRoleForm" name="addRoleForm" action="?">
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="role_name" class="col-sm-2 control-label">角色名称</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="role_name" name="role_name" placeholder="角色名称">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="role_desc" class="col-sm-2 control-label">角色描述</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="role_desc" name="role_desc" placeholder="角色描述">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" onclick="$('#addRoleForm').submit()">添加</button>
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<div class="modal fade" role="dialog" id="aclModal" data-backdrop="static" aria-labelledby="gridSystemModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">权限配置</h4>
+					</div>
+					<form class="form-horizontal"  method="post" id="aclForm" name="aclForm" action="?">
+						<div class="modal-body" style="height: 500px; overflow-y: scroll">
+							<table id="menuTable" class="table table-bordered table-hover">
+								<thead>
+								<tr>
+									<th width="15%">名称</th>
+									<th width="10%">类型</th>
+									<th width="10%"><input id="check-all" type="checkbox"></th>
+								</tr>
+								</thead>
+								<tbody id="asdfasdfa">
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" onclick="$('#addRoleForm').submit()">添加</button>
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		<script>
+			function delRole(roleId){
+				myDialog.confirmDialog.open({
+					title:'操作提示',
+					body:'你确定要删除该角色吗?',
+					confirmCallback:function(){
+						$.ajax({
+							type: "GET",
+							url:'/admin/sys/role/del',
+							data:{
+								roleId:roleId
+							},
+							success: function(data) {
+								if(data.error){
+									//alert(data.error)
+									myDialog.tipDialog.open({
+										level:3,
+										body:data.error,
+										title:'系统提示'
+									})
+								}else{
+									window.location.href='/admin/sys/role'
+								}
+							}
+						})
+					}
+				});
+			}
+			function openAcl(roleId){
+				$.ajax({
+					type: "GET",
+					url:'/admin/sys/role/acl',
+					data:{
+						roleId:roleId
+					},
+					success: function(data) {
+						if(data.error){
+
+						}else{
+							for(var i = 0;i < data.length; i ++){
+								var resObj = data[i]
+								var indent = resObj.nlevel * 25
+								$('#menuTable>tbody').append(
+										'<tr>' +
+										'	<td style="padding-left:'+indent+'px ">' +resObj.name+'</td>' +
+										'	<td>' +(resObj.restype==1?'目录':(resObj.restype==2?'菜单':'功能/页面'))+'</td>' +
+										'	<td>' + '</td>' +
+										'</tr>'
+								)
+							}
+							$('#aclModal').modal()
+						}
+					}
+				})
+			}
+			$(function(){
+
+				$("#addRoleForm").validate({
+					rules: {
+						role_name: {
+							required: true,
+							remote:{
+								type:"GET",
+								dataType: 'json',
+								url:"/admin/sys/role/checkSameName",
+								data:{
+								}
+							}
+						},
+						role_desc: {
+							required: true
+						}
+
+					},
+					messages:{
+						role_name:{
+							remote:'存在相同名称'
+						}
+					},
+					submitHandler:function(form){
+						$.ajax({
+							type: "POST",
+							url:'/admin/sys/role/add',
+							data:{
+								role_name:$('#role_name').val(),
+								role_desc:$('#role_desc').val()
+							},
+							success: function(data) {
+								if(data.error){
+									//alert(data.error)
+									myDialog.tipDialog.open({
+										level:3,
+										body:data.error,
+										title:'系统提示'
+									})
+								}else{
+									window.location.href='/admin/sys/role'
+								}
+							}
+						})
+					}
+				});
+			})
+		</script>
+	</body>
+</html>

@@ -66,7 +66,7 @@ $.ajaxSetup({
 		}else {
 			errorMsg = '请求错误,请稍后再试'
 		}
-		tipDialog.open({
+		myDialog.tipDialog.open({
 			level:3,
 			body:errorMsg,
 			title:'系统提示'
@@ -90,24 +90,69 @@ $(function(){
 					'</div>' +
 				'</div>' +
 			'</div>' +
-		'</div>');
+		'</div>'+
+		'<div class="modal fade bs-example-modal-sm" ' +
+			'role="dialog" aria-labelledby="mySmallModalLabel" id="confirmDialogModal">' +
+			'<div class="modal-dialog modal-sm">' +
+				'<div class="modal-content">' +
+					'<div class="modal-header">' +
+						'<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+						'<h4 class="modal-title" id="myModalLabel">Modal title</h4>' +
+					'</div>' +
+					'<div class="modal-body">asdfasdf' +
+					'</div>' +
+					'<div class="modal-footer">' +
+						'<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>' +
+						'<button type="button" class="btn btn-primary" id="confirm_">确定</button>' +
+					'</div>' +
+				'</div>' +
+			'</div>' +
+		'</div>'
+	);
 
 })
-var tipDialog = {
-	open:function(opts){
-		opts = $.extend({
-			level:0,//0成功,1警告,2错误
-			body:'',
-			title:''
-		}, opts);
-		var title = $('#tipDialogModal').find('.modal-title')
-		var content = $('#tipDialogModal').find('.modal-body')
-		$(title[0]).html(opts.title)
-		$(content[0]).html(opts.body)
-		$('#tipDialogModal').modal('toggle')
+var myDialog = {
+	tipDialog : {
+		open:function(opts){
+			opts = $.extend({
+				level:0,//0成功,1警告,2错误
+				body:'',
+				title:''
+			}, opts);
+			var title = $('#tipDialogModal').find('.modal-title')
+			var content = $('#tipDialogModal').find('.modal-body')
+			$(title[0]).html(opts.title)
+			$(content[0]).html(opts.body)
+			$('#tipDialogModal').modal('toggle')
 
+		},
+		close:function(){
+			$('#tipDialogModal').modal('hide')
+		}
 	},
-	close:function(){
-		$('#tipDialogModal').modal('hide')
+	confirmDialog:{
+		open:function(opts){
+			var self = this;
+			opts = $.extend({
+				body:'',
+				title:'',
+				confirmCallback:null
+			}, opts);
+			var title = $('#confirmDialogModal').find('.modal-title')
+			var content = $('#confirmDialogModal').find('.modal-body')
+			$(title[0]).html(opts.title)
+			$(content[0]).html(opts.body)
+			$('#confirm_').one("click",function(){
+				opts.confirmCallback();
+				self.close();
+			})
+			$('#confirmDialogModal').modal('toggle')
+
+		},
+		close:function(){
+			$('#confirmDialogModal').modal('hide')
+		}
 	}
 }
+
+
