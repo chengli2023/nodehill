@@ -1,7 +1,5 @@
 var Sequelize = require('sequelize')
 var db = require('../../config/db/db')
-var roleModel = require('./Role')
-var menuService = require('../../service/admin/menu')
 exports = module.exports = db.define('Menu', {
         name: {
             type: Sequelize.STRING(25)
@@ -14,6 +12,10 @@ exports = module.exports = db.define('Menu', {
         },
         restype:{
             type: Sequelize.INTEGER
+        },
+        reskey:{
+            type: Sequelize.STRING(255),
+            allowNull: false
         },
         desc:{
             type: Sequelize.STRING(255),
@@ -28,6 +30,9 @@ exports = module.exports = db.define('Menu', {
         },
         nlevel:{
             type: Sequelize.VIRTUAL
+        },
+        isHas:{
+            type: Sequelize.VIRTUAL
         }
     },{
         freezeTableName: true,//禁用sequelize的表面自动转换功能
@@ -35,10 +40,7 @@ exports = module.exports = db.define('Menu', {
         paranoid: false,//禁用deleteAt
         underscored: true//列名用下划线形式
     });
-exports.createRes = function* ({name,pid,url,restype,desc,order,icon}) {
-    let menuObj = yield exports.create({name,pid,url,restype,desc,order,icon})
-    return menuObj;
-};
+
 
 exports.findAllMenus = function* ({pid=null, roleids = null,restype=null}) {
     let pidwhere = '';
@@ -62,5 +64,31 @@ exports.findAllMenus = function* ({pid=null, roleids = null,restype=null}) {
 
 
     /**** 资源层级排序****/
-    return menuService.resSorter(menuObjs,0,0)
+    return this.resSorter(menuObjs,0,0)
+};
+exports.resSorter = function(menuObjs,pid,startLevel){
+    let results = [];
+    function todo(pid,nlevel){
+        let arrtmp = []
+        for(let i = 0; i < menuObjs.length; i ++){
+            let menuObj = menuObjs[i]
+            if(menuObj.pid == pid){
+                arrtmp.push(menuObj)
+            }
+            continue
+        }
+
+        arrtmp.sort((a,b)=>{
+            return a.order - b.order
+        })
+        for(let i = 0; i < arrtmp.length; i ++){
+
+            arrtmp[i].nlevel = nlevel;
+            results.push(arrtmp[i])
+            todo(arrtmp[i].id,nlevel + 1)
+        }
+    }
+    todo(pid,startLevel)
+    return results;
+
 };

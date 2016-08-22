@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>资源管理</title>
+        <meta name="description" content="无锡">
+        <meta name="viewport" content="width=1200">
+		<link rel="shortcut icon" href="/public/images/favicon.png">
+		<link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+		<link rel="stylesheet" href="/public/bower_components/components-font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/public/stylesheets/main.css">
+		<script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
+		<script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="/public/javascripts/common.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<% include ../include/header.html %>
+			<div class="index-container">
+				<% include ../include/menu.html %>
+				<div class="search-box gap-lr text-right">
+					<input type="text" placeholder="模糊查询"> 
+					<a href="list.html" class="btn btn-primary">搜索</a>
+				</div>
+				<ul class="nav-bar">
+					<li class="active"><a>用户管理</a></li>
+				</ul>
+				<div class="gap">
+					<button class="btn btn-primary pull-right" onclick="editUser('add')" title="创建用户">
+						<span class="fa fa-plus"></span>
+					</button>
+
+					<br>
+					<table class="table table-bordered table-hover">
+						<thead>
+						<tr>
+							<th width="10%">用户名</th>
+							<th width="10%">邮箱</th>
+							<th width="10%">角色</th>
+							<th width="10%">操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						<%for(let i = 0;i < users.length; i++){
+							let userObj = users[i]
+							let roleNames = [];
+							let isSuperAdmin = false;
+							for(let i = 0;i < userObj.Roles.length;i ++){
+								let roleObj = userObj.Roles[i]
+								roleNames.push(roleObj.rolename)
+								isSuperAdmin = roleObj.type == 0
+							}
+							if(!commonData.isSuperAdmin && isSuperAdmin){
+								continue;
+							}
+						%>
+							<tr id="">
+								<td><%=userObj.username%></td>
+								<td><%=userObj.email%></td>
+								<td><%=roleNames.join(',')%></td>
+								<td>
+									<button class="btn btn-primary" onclick="editUser('edit','<%=userObj.id%>',<%=isSuperAdmin%>)" title="编辑">
+										<i class="fa fa-edit"></i>
+									</button>
+									<%if(userObj.Roles[0].type != 0){%>
+									<button type="button" class="btn btn-danger" title="删除" onclick="delUser('<%=userObj.id%>')">
+										<i class="fa fa-trash"></i>
+									</button>
+									<%}%>
+									<button type="button" class="btn btn-success" title="生成新密码" onclick="refreshPassword('<%=userObj.id%>')">
+										<i class="fa fa-refresh">重置密码</i>
+									</button>
+								</td>
+							</tr>
+						<%}%>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+			<div class="push"></div>
+		</div>
+		<% include ../include/footer.html %>
+		<div class="modal fade" role="dialog" id="addModal" data-backdrop="static" aria-labelledby="gridSystemModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title"></h4>
+					</div>
+					<form class="form-horizontal"  method="post" id="addUserForm" name="addUserForm" action="?">
+						<input type="hidden" name="userId">
+						<input type="hidden" name="isSuperAdmin">
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="user_name" class="col-sm-2 control-label">用户名称</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="user_name" name="user_name" placeholder="用户名称">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="user_email" class="col-sm-2 control-label">邮箱</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="user_email" name="user_email" placeholder="邮箱">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="rolesSelect" class="col-sm-2 control-label">角色</label>
+								<div class="col-sm-10" id="rolesSelect" >
+									<ul>
+										<%for(let i = 0;i < allRole.length;i ++){%>
+											<%if(!commonData.isSuperAdmin && allRole[i].type == 0){continue;}%>
+
+											<li style="line-height: 30px">
+												<span><%=allRole[i].rolename%></span>
+												<input name="checkbox" type="checkbox" value="<%=allRole[i].id%>">
+											</li>
+										<%}%>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" onclick="$('#addUserForm').submit()">保存</button>
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<script>
+			function refreshPassword(userId){
+				myDialog.confirmDialog.open({
+					title:'操作提示',
+					body:'密码重置后将发送到对方邮件中,是否确定重置?',
+					confirmCallback:function(){
+						$.ajax({
+							type: "GET",
+							url:'/admin/sys/user/refreshPassword',
+							data:{
+								userId:userId
+							},
+							success: function(data) {
+								if(data.error){
+									//alert(data.error)
+									myDialog.tipDialog.open({
+										level:3,
+										body:data.error,
+										title:'系统提示'
+									})
+								}else{
+									myDialog.confirmDialog.close();
+									myDialog.tipDialog.open({
+										level:3,
+										body:'密码已经发送到对方邮箱',
+										title:'系统提示'
+									})
+								}
+							}
+						})
+					}
+				});
+			}
+			function editUser(operType,userId,isSuperAdmin){
+				addUserFormValidator.resetForm();
+				$('#addUserForm')[0].reset()
+				$('#rolesSelect input[name="checkbox"]').each(function(){
+					$(this).attr('disabled',false);
+				})
+				$('#rolesSelect input[name="checkbox"]').each(function(){
+
+//					$(this).attr("checked", undefined);
+					$(this).prop("checked",false)
+				})
+				if(operType == 'add'){
+					$('#addModal .modal-title').text('创建用户')
+					$('#addModal').modal()
+				}else{
+					$('#addModal .modal-title').text('编辑用户')
+					$('input[name="userId"]').val(userId)
+
+					$.ajax({
+						type: "GET",
+						url:'/admin/sys/user/detail',
+						data:{
+							userId:userId
+						},
+						success: function(data) {
+							if(data.error){
+								//alert(data.error)
+								myDialog.tipDialog.open({
+									level:3,
+									body:data.error,
+									title:'系统提示'
+								})
+							}else{
+								for(var i = 0;i < data.Roles.length;i ++){
+									var roleObj = data.Roles[i]
+
+									$('#rolesSelect input[name="checkbox"]').each(function(){
+										if(roleObj.id == $(this).val()){
+
+											$(this).prop("checked",true)
+										}
+										if(isSuperAdmin){
+											$(this).attr('disabled',true);
+										}
+									})
+								}
+
+								$('#addModal #user_name').val(data.username)
+								$('#addModal #user_email').val(data.email)
+								$('#addModal').modal()
+							}
+						}
+					})
+				}
+			}
+			function delUser(userId){
+				myDialog.confirmDialog.open({
+					title:'操作提示',
+					body:'你确定要删除该用户吗?',
+					confirmCallback:function(){
+						$.ajax({
+							type: "GET",
+							url:'/admin/sys/user/del',
+							data:{
+								userId:userId
+							},
+							success: function(data) {
+								if(data.error){
+									//alert(data.error)
+									myDialog.tipDialog.open({
+										level:3,
+										body:data.error,
+										title:'系统提示'
+									})
+								}else{
+									window.location.href='/admin/sys/user'
+								}
+							}
+						})
+					}
+				});
+			}
+			var addUserFormValidator = null;
+			$(function(){
+
+				addUserFormValidator = $("#addUserForm").validate({
+					rules: {
+						user_name: {
+							required: true,
+							remote:{
+								type:"GET",
+								dataType: 'json',
+								url:"/admin/sys/user/userCheckSameName",
+								data:{
+									userId : function(){
+										return $('input[name="userId"]').val()
+									}
+								}
+							}
+						},
+						user_email: {
+							required: true,
+							email:true,
+							remote:{
+								type:"GET",
+								dataType: 'json',
+								url:"/admin/sys/user/userCheckSameName",
+								data:{
+									userId : function(){
+										return $('input[name="userId"]').val()
+									}
+								}
+							}
+						}
+
+					},
+					messages:{
+						user_name:{
+							remote:'存在相同名称'
+						},
+						user_email:{
+							remote:'存在相同邮箱'
+						}
+					},
+					submitHandler:function(form){
+						var selectedRoles = []
+						$('#rolesSelect input[name="checkbox"]').each(function(){
+							if($(this).is(':checked')){
+								selectedRoles.push($(this).val())
+							}
+						})
+						if(selectedRoles.length == 0){
+							myDialog.tipDialog.open({
+								level:3,
+								body:'请选择角色',
+								title:'操作提示'
+							})
+							return;
+						}
+						var userId = $('input[name="userId"]').val()
+						if(userId){//编辑
+							$.ajax({
+								type: "POST",
+								url:'/admin/sys/user/edit',
+								data:{
+									userId:userId,
+									user_name:$('#user_name').val(),
+									user_email:$('#user_email').val(),
+									roleIds:selectedRoles.join(',')
+								},
+								success: function(data) {
+									if(data.error){
+										//alert(data.error)
+										myDialog.tipDialog.open({
+											level:3,
+											body:data.error,
+											title:'系统提示'
+										})
+									}else{
+										window.location.href='/admin/sys/user'
+									}
+								}
+							})
+							return;
+						}
+						$.ajax({
+							type: "POST",
+							url:'/admin/sys/user/create',
+							data:{
+								user_name:$('#user_name').val(),
+								user_email:$('#user_email').val(),
+								roleIds:selectedRoles.join(',')
+							},
+							success: function(data) {
+								if(data.error){
+									//alert(data.error)
+									myDialog.tipDialog.open({
+										level:3,
+										body:data.error,
+										title:'系统提示'
+									})
+								}else{
+									window.location.href='/admin/sys/user'
+								}
+							}
+						})
+					}
+				});
+			})
+		</script>
+	</body>
+</html>

@@ -15,7 +15,7 @@ log4js.configure('core/config/log4jsConfig.json',{ reloadSecs: 5 });
 var co = require('co');
 var checkLogin = require('../middleware/admin/chekLogin')
 var authorization = require('../middleware/admin/authorization')
-var utilsController = require('../controller/admin/utils')
+var utilsController = require('../controller/admin/utils_C')
 //数据库初始化
 require('../models/dbInit')
 
@@ -49,13 +49,18 @@ module.exports = function (app) {
     app.use('/admin',checkLogin.checkLogin);
     //后台系统-权限控制
     app.use('/admin',authorization({
-        escapeACL:[
-            '/admin/login',
+        escapeACL:[//不需要权限控制的资源
             '/admin/logout',
-            '/admin/forget',
-            '/admin/verifyCode',
-            '/admin/sys/res/checkSameLevelOrder',
-            '/admin/sys/role/checkSameName'
+            '/admin/profile',
+            '/admin/sys/res/checkSameNameInRes',
+            '/admin/sys/role/roleCheckSameName',
+            '/admin/sys/user/userCheckSameName',
+            '/admin/sys/user/refreshPassword',
+
+            '/admin/userCheckSameEmail',
+            '/admin/checkPassword',
+            '/admin/updateEmail',
+            '/admin/updatePassword'
         ]
     }));
 

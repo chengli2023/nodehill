@@ -117,13 +117,17 @@ var myDialog = {
 			opts = $.extend({
 				level:0,//0成功,1警告,2错误
 				body:'',
-				title:''
+				title:'系统提示',
+				hiddenCallback:null
 			}, opts);
 			var title = $('#tipDialogModal').find('.modal-title')
 			var content = $('#tipDialogModal').find('.modal-body')
 			$(title[0]).html(opts.title)
 			$(content[0]).html(opts.body)
 			$('#tipDialogModal').modal('toggle')
+			$('#tipDialogModal').one('hidden.bs.modal', function (e) {
+				!opts.hiddenCallback || opts.hiddenCallback()
+			})
 
 		},
 		close:function(){
@@ -143,7 +147,7 @@ var myDialog = {
 			$(title[0]).html(opts.title)
 			$(content[0]).html(opts.body)
 			$('#confirm_').one("click",function(){
-				opts.confirmCallback();
+				!opts.confirmCallback || opts.confirmCallback();
 				self.close();
 			})
 			$('#confirmDialogModal').modal('toggle')

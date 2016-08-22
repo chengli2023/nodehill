@@ -14,6 +14,9 @@
 		<script src="/public/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
 		<script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="/public/javascripts/common.js"></script>
+
+		<link href="/public/bower_components/jquery-treetable/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+		<script src="/public/bower_components/jquery-treetable/jquery.treetable.js"></script>
 	</head>
 	<body>
 		<div class="wrapper">
@@ -28,12 +31,12 @@
 					<li class="active"><a>角色管理</a></li>
 				</ul>
 				<div class="gap">
-					<button class="btn btn-primary pull-right"  data-toggle="modal" data-target="#addModal" title="添加">
+					<button class="btn btn-primary pull-right" onclick="editRole('add')" title="添加">
 						<span class="fa fa-plus"></span>
 					</button>
 
 					<br>
-					<table class="table table-bordered table-hover">
+					<table class="table table-bordered table-hover" >
 						<thead>
 						<tr>
 							<th width="15%">名称</th>
@@ -49,15 +52,21 @@
 								<td><%=roleObj.rolename%></td>
 								<td><%=roleObj.roledesc%></td>
 								<td>
-									<button class="btn btn-primary" title="编辑">
+									<button class="btn btn-primary" onclick="editRole('edit','<%=roleObj.id%>')" title="编辑">
 										<i class="fa fa-edit"></i>
 									</button>
-									<button type="button" class="btn btn-danger" title="删除" onclick="delRole(<%=roleObj.id%>)">
+									<%if(roleObj.type != 0){%>
+									<button type="button" class="btn btn-danger" title="删除" onclick="delRole('<%=roleObj.id%>')">
 										<i class="fa fa-trash"></i>
 									</button>
-									<button type="button" class="btn btn-info" onclick="openAcl(<%=roleObj.id%>)" title="权限配置">
+									<%}%>
+									<%if(roleObj.type != 0){%>
+									<button type="button" class="btn btn-info" onclick="openAcl('<%=roleObj.id%>')" title="权限配置">
 										<i class="fa fa-edit"></i>权限配置
 									</button>
+									<%}else{%>
+										所有权限
+									<%}%>
 								</td>
 							</tr>
 						<%}%>
@@ -74,9 +83,10 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title">添加角色</h4>
+							<h4 class="modal-title">添加角色</h4>
 					</div>
 					<form class="form-horizontal"  method="post" id="addRoleForm" name="addRoleForm" action="?">
+						<input type="hidden" name="roleId">
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="role_name" class="col-sm-2 control-label">角色名称</label>
@@ -93,7 +103,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-							<button type="button" class="btn btn-primary" onclick="$('#addRoleForm').submit()">添加</button>
+							<button type="button" class="btn btn-primary" onclick="$('#addRoleForm').submit()">保存</button>
 						</div>
 					</form>
 				</div><!-- /.modal-content -->
@@ -117,19 +127,60 @@
 									<th width="10%"><input id="check-all" type="checkbox"></th>
 								</tr>
 								</thead>
-								<tbody id="asdfasdfa">
+								<tbody>
+									<%for(let i = 0;i < allRes.length;i ++){
+										let resObj = allRes[i]
+									%>
+										<tr data-tt-id="<%=resObj.id%>" data-tt-parent-id="<%=resObj.pid%>">
+											<td><%=resObj.name%></td>
+											<td><%=resObj.restype==1?'目录':(resObj.restype==2?'菜单':'功能/页面')%></td>
+											<td id="<%=resObj.id%>_res"><input name="checkbox" type="checkbox" value="<%=resObj.id%>"></td>
+										</tr>
+									<%}%>
 								</tbody>
 							</table>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-							<button type="button" class="btn btn-primary" onclick="$('#addRoleForm').submit()">添加</button>
+							<button type="button" class="btn btn-primary" onclick="aclSet()">确定</button>
 						</div>
 					</form>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 		<script>
+			function editRole(operType,roleId){
+				addRoleFormValidator.resetForm();
+				$('#addRoleForm')[0].reset()
+				if(operType == 'add'){
+					$('#addModal .modal-title').text('添加角色')
+					$('#addModal').modal()
+				}else{
+					$('#addModal .modal-title').text('编辑角色')
+					$('input[name="roleId"]').val(roleId)
+					$.ajax({
+						type: "GET",
+						url:'/admin/sys/role/roleDetail',
+						data:{
+							roleId:roleId
+						},
+						success: function(data) {
+							if(data.error){
+								//alert(data.error)
+								myDialog.tipDialog.open({
+									level:3,
+									body:data.error,
+									title:'系统提示'
+								})
+							}else{
+								$('#addModal #role_name').val(data.rolename)
+								$('#addModal #role_desc').val(data.roledesc)
+								$('#addModal').modal()
+							}
+						}
+					})
+				}
+			}
 			function delRole(roleId){
 				myDialog.confirmDialog.open({
 					title:'操作提示',
@@ -157,6 +208,35 @@
 					}
 				});
 			}
+			function aclSet(){
+				var checkedList = [];
+				$('input[name="checkbox"]').each(function(){
+					if($(this).is(':checked')){
+						checkedList.push($(this).val())
+					}
+				})
+				var roleIdWillSet = $('#roleIdWillSet').val()
+				$.ajax({
+					type: "POST",
+					url:'/admin/sys/role/aclSet',
+					data:{
+						roleIdWillSet:roleIdWillSet,
+						checkedList:checkedList.join(',')
+					},
+					success: function(data) {
+						if(data.error){
+							//alert(data.error)
+							myDialog.tipDialog.open({
+								level:3,
+								body:data.error,
+								title:'系统提示'
+							})
+						}else{
+							window.location.href='/admin/sys/role'
+						}
+					}
+				})
+			}
 			function openAcl(roleId){
 				$.ajax({
 					type: "GET",
@@ -168,33 +248,33 @@
 						if(data.error){
 
 						}else{
+							$('#menuTable>tbody').append('<input id="roleIdWillSet" hidden="hidden" value="'+roleId+'">')
 							for(var i = 0;i < data.length; i ++){
 								var resObj = data[i]
-								var indent = resObj.nlevel * 25
-								$('#menuTable>tbody').append(
-										'<tr>' +
-										'	<td style="padding-left:'+indent+'px ">' +resObj.name+'</td>' +
-										'	<td>' +(resObj.restype==1?'目录':(resObj.restype==2?'菜单':'功能/页面'))+'</td>' +
-										'	<td>' + '</td>' +
-										'</tr>'
-								)
+								$('#'+resObj.id+'_res>input[name="checkbox"]').prop("checked",true)
 							}
 							$('#aclModal').modal()
 						}
 					}
 				})
 			}
+			var addRoleFormValidator = null;
 			$(function(){
-
-				$("#addRoleForm").validate({
+				$("#menuTable").treetable({
+					expandable: true ,
+					clickableNodeNames:true,
+					initialState: "expanded"
+				});
+				addRoleFormValidator = $("#addRoleForm").validate({
 					rules: {
 						role_name: {
 							required: true,
 							remote:{
 								type:"GET",
 								dataType: 'json',
-								url:"/admin/sys/role/checkSameName",
+								url:"/admin/sys/role/roleCheckSameName",
 								data:{
+									roleId : function(){return $('input[name="roleId"]').val()}
 								}
 							}
 						},
@@ -209,6 +289,31 @@
 						}
 					},
 					submitHandler:function(form){
+						var roleId = $('input[name="roleId"]').val();
+						if(roleId){//编辑
+							$.ajax({
+								type: "POST",
+								url:'/admin/sys/role/edit',
+								data:{
+									roleId:roleId,
+									role_name:$('#role_name').val(),
+									role_desc:$('#role_desc').val()
+								},
+								success: function(data) {
+									if(data.error){
+										//alert(data.error)
+										myDialog.tipDialog.open({
+											level:3,
+											body:data.error,
+											title:'系统提示'
+										})
+									}else{
+										window.location.href='/admin/sys/role'
+									}
+								}
+							})
+							return;
+						}
 						$.ajax({
 							type: "POST",
 							url:'/admin/sys/role/add',

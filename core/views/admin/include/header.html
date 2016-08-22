@@ -3,8 +3,8 @@
         <img src="/public/images/logo1.png" />
         <div class="pull-right">
             <div class="header-info">
-                <p><%=commonData.username%> hello(<%=commonData.rolenames%>)</p>
-                <div>现时间：<span id="now-time">2016年02月20日</span></div>
+                <p><%=commonData.rolenames.join(',')%>:<a href="/admin/profile"><%=commonData.username%></a></p>
+                <!--<div>现时间：<span id="now-time"></span></div>-->
             </div>
             <div class="line-gap"></div>
             <a href="/admin/logout">

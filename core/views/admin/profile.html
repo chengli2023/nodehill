@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>资源管理</title>
+        <meta name="description" content="无锡">
+        <meta name="viewport" content="width=1200">
+		<link rel="shortcut icon" href="/public/images/favicon.png">
+		<link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+		<link rel="stylesheet" href="/public/bower_components/components-font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/public/stylesheets/main.css">
+		<script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="/public/javascripts/jQuery.md5.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
+		<script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="/public/javascripts/common.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<% include ./include/header.html %>
+			<div class="index-container">
+				<% include ./include/menu.html %>
+				<div class="search-box gap-lr text-right">
+					<input type="text" placeholder="模糊查询"> 
+					<a href="list.html" class="btn btn-primary">搜索</a>
+				</div>
+				<ul class="nav-bar">
+					<li class="active"><a>管理员信息</a></li>
+				</ul>
+				<div class="gap">
+					<div>用户名：<%=commonData.username%></div>
+					<div>邮箱：<%=commonData.email%>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#updateEmailModal">修改邮箱</a></div>
+					<br>
+					<div><a href="#" data-toggle="modal" data-target="#updatePasswordModal">修改密码</a></div>
+
+				</div>
+			</div>
+			<div class="push"></div>
+		</div>
+		<% include ./include/footer.html %>
+		<div class="modal fade" role="dialog" id="updateEmailModal" data-backdrop="static" aria-labelledby="gridSystemModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">修改邮箱</h4>
+					</div>
+
+					<form class="form-horizontal"  method="post" id="updateEmailForm" name="updateEmailForm" action="?">
+
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="user_email" class="col-sm-2 control-label">邮箱</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" id="user_email" name="user_email" placeholder="邮箱">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="profile_password" class="col-sm-2 control-label">密码</label>
+								<div class="col-sm-6">
+									<input type="password" class="form-control" id="profile_password" name="profile_password" >
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" onclick="$('#updateEmailForm').submit()">确认</button>
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		<div class="modal fade" role="dialog" id="updatePasswordModal" data-backdrop="static" aria-labelledby="gridSystemModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">修改邮箱</h4>
+					</div>
+
+					<form class="form-horizontal"  method="post" id="updatePasswordForm" name="updatePasswordForm" action="?">
+
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="old_password" class="col-sm-3 control-label">原密码</label>
+								<div class="col-sm-6">
+									<input type="password" class="form-control" id="old_password" name="old_password" >
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="new_password" class="col-sm-3 control-label">新密码</label>
+								<div class="col-sm-6">
+									<input type="password" class="form-control" id="new_password" name="new_password" >
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="re_new_password" class="col-sm-3 control-label">确认新密码</label>
+								<div class="col-sm-6">
+									<input type="password" class="form-control" id="re_new_password" name="re_new_password" >
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" onclick="$('#updatePasswordForm').submit()">确认</button>
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		<script>
+			var updateEmailFormValidator = null;
+			var updatePasswordFormValidator = null;
+			$(function(){
+				updateEmailFormValidator = $("#updateEmailForm").validate({
+					rules: {
+						user_email: {
+							required: true,
+							email:true,
+							remote:{
+								type:"GET",
+								dataType: 'json',
+								url:"/admin/userCheckSameEmail",
+								data:{
+
+								}
+							}
+						},
+						profile_password: {
+							required: true,
+							remote:{
+								type:"GET",
+								dataType: 'json',
+								url:"/admin/checkPassword",
+								data:{
+									profile_password:function(){
+										return $.md5($('#profile_password').val())
+									}
+								}
+							}
+						}
+
+					},
+					messages:{
+						user_email:{
+							remote:'该邮箱已被使用'
+						},
+						profile_password:{
+							remote:'密码错误'
+						}
+					},
+					submitHandler:function(form){
+
+						$.ajax({
+							type: "POST",
+							url:'/admin/updateEmail',
+							data:{
+								user_email:$('#user_email').val(),
+								password: $.md5($('#profile_password').val())
+							},
+							success: function(data) {
+								if(data.error){
+									//alert(data.error)
+									myDialog.tipDialog.open({
+										level:3,
+										body:data.error,
+										title:'系统提示'
+									})
+								}else{
+									window.location.href='/admin/profile'
+								}
+							}
+						})
+					}
+				});
+
+				updatePasswordFormValidator = $("#updatePasswordForm").validate({
+					rules: {
+						old_password: {
+							required: true,
+							remote:{
+								type:"GET",
+								dataType: 'json',
+								url:"/admin/checkPassword",
+								data:{
+									profile_password:function(){
+										return $.md5($('#old_password').val())
+									}
+								}
+							}
+						},
+						new_password: {
+							required: true
+						},
+						re_new_password: {
+							required: true,
+							equalTo: "#new_password"
+						}
+
+					},
+					messages:{
+						old_password:{
+							remote:'密码错误'
+						}
+					},
+					submitHandler:function(form){
+
+						$.ajax({
+							type: "POST",
+							url:'/admin/updatePassword',
+							data:{
+								old_password: $.md5($('#old_password').val()),
+								new_password:$.md5($('#new_password').val())
+							},
+							success: function(data) {
+								if(data.error){
+									//alert(data.error)
+									myDialog.tipDialog.open({
+										level:3,
+										body:data.error,
+										title:'系统提示'
+									})
+								}else{
+									myDialog.tipDialog.open({
+										level:3,
+										body:'密码修改成功,必须重新登录.',
+										title:'系统提示',
+										hiddenCallback:function(){
+											window.location.href='/admin/login'
+										}
+									})
+
+								}
+							}
+						})
+					}
+				});
+			})
+		</script>
+	</body>
+</html>

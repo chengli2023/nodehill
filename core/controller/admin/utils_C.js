@@ -8,10 +8,10 @@ var co = require('co');
 var logger = require('log4js').getLogger('CONTROLLER:INDEX');
 
 var db = require('../../config/db/db')
-var adminService = require('../../service/admin/admin')
-var adminModel = require('../../models/admin/Admin')
-var roleModel = require('../../models/admin/Role')
-var menuModel = require('../../models/admin/Menu')
+var adminService = require('../../service/admin/admin_S')
+var adminModel = require('../../models/admin/Admin_M')
+var roleModel = require('../../models/admin/Role_M')
+var menuModel = require('../../models/admin/Menu_M')
 
 
 exports.isLogin4Admin = (req) =>{
@@ -37,13 +37,18 @@ exports.getAdminSession =(req)=> {
 }
 
 exports.getCommonData =function*(req) {
+    let self = this;
     let currRole = yield this.getCurrRole(req)
     
     let menus = yield menuModel.findAllMenus({roleids:currRole.roleids,restype:[1,2]})
     return{
-        username:currRole.username,
-        rolenames:currRole.rolenames.join(','),
-        menus:menus
+        userId:currRole.userId,//用户ID
+        email:currRole.email,//email
+        username:currRole.username,//用户名
+        rolenames:currRole.rolenames,//数组
+        roleids:currRole.roleids,//数组
+        menus:menus,//数组
+        isSuperAdmin:currRole.isSuperAdmin//boolean
     }
 
 }
@@ -55,15 +60,24 @@ exports.getCurrRole =function*(req) {
         }]
     })
     let username = adminObj.username
+    let email = adminObj.email
+    let userId = adminObj.id
     let rolenames = [],
         roleids = [];
+    let isSuperAdmin = false;
     adminObj.Roles.forEach((role)=>{
         rolenames.push(role.rolename)
         roleids.push(role.id)
+        if(role.type == 0){//是超级管理员
+            isSuperAdmin = true;
+        }
     })
     return{
+        userId:userId,
         username:username,
+        email:email,
         rolenames:rolenames,
-        roleids:roleids
+        roleids:roleids,
+        isSuperAdmin:isSuperAdmin
     }
 }

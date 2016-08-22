@@ -17,7 +17,7 @@ var active = '系统设置'
             <%if(menuObj.restype == 1){%>
                 <li <%if(active == menuObj.name){%>class="active"<%}%>>
                     <div class="nav-title">
-                        <span class="fa  fa-th-list"></span>
+                        <span class="fa  fa-<%=menuObj.icon%>"></span>
                         <div class="desktop-chart">
                             <i class="icon-desktop"></i>
                             <i class="icon-bar-chart"></i>
@@ -31,7 +31,7 @@ var active = '系统设置'
                             let menuObj = menus[j];
                         %>
                             <%if(menuObj.get('nlevel') == currLevel+1) {%>
-                                <li><a href="<%if(menuObj.get('url')){%><%=menuObj.get('url')%><%}else{%>#<%}%>"><%=menuObj.name%></a></li>
+                                <li><a href="<%if(menuObj.get('url')){%><%=menuObj.get('url')%><%}else{%>#<%}%>"><i class="fa fa-<%=menuObj.icon%>"></i><%=menuObj.name%></a></li>
                             <%}else if(menuObj.nlevel == currLevel){
                                 i = j-1
                                 break;

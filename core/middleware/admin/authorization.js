@@ -3,12 +3,12 @@
  */
 var co = require('co');
 var db = require('../../config/db/db')
-var utilsController = require('../../controller/admin/utils')
-var adminService = require('../../service/admin/admin')
+var utilsController = require('../../controller/admin/utils_C')
+var adminService = require('../../service/admin/admin_S')
 
-var AdminModel = require('../../models/admin/Admin')
-var RoleModel = require('../../models/admin/Role')
-var MenuModel = require('../../models/admin/Menu')
+var AdminModel = require('../../models/admin/Admin_M')
+var RoleModel = require('../../models/admin/Role_M')
+var MenuModel = require('../../models/admin/Menu_M')
 
 exports = module.exports = function(options){
     var opts = options || {};
@@ -25,14 +25,13 @@ exports = module.exports = function(options){
 
 exports.handle = function(req,res,next){
     let self = this;
+    //判断请求是否需要权限控制
+    let path = self.reqPath();
+    if(!req.isNeedAccessControl || ~self.escapeACL.indexOf(path)){
+        next();
+        return;
+    }
     co(function*(){
-        //判断请求是否需要权限控制
-        let path = self.reqPath();
-
-        if(~self.escapeACL.indexOf(path)){
-            next();
-            return;
-        }
 
         /******根据当前角色和请求资源判断是否有权限*****/
         let userId = utilsController.getAdminSession(req).id;
