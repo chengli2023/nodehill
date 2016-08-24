@@ -2,21 +2,18 @@
 
 ##主要功能
 
-  * 后台用户管理
-
-    CRUD，密码重置,发邮件,多角色管理
-  * 资源管理
-  
-    CRUD
-  * 角色管理
-  
+    * 后台用户管理
+     CRUD，密码重置,发邮件,多角色管理
+    * 资源管理
+     CRUD
+    * 角色管理
      CRUD，权限配置
    
 ##技术特点：
 
-   * 使用了ES6语法，使用了ES6的Generator
-   * 用Tj的CO模块，所以不存在回调噩梦
-   * 为了让pm2管理，让多进程共享session，用redis存放session
+    * 使用了ES6语法，使用了ES6的Generator
+    * 用Tj的CO模块，所以不存在回调噩梦
+    * 为了让pm2管理，让多进程共享session，用redis存放session
    
 ##环境要求：
 
