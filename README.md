@@ -11,19 +11,19 @@
   * 角色管理
   
      CRUD，权限配置
-
+   
 ##技术特点：
 
   * 使用了ES6语法，使用了ES6的Generator
   * 用Tj的CO模块，所以不存在回调噩梦
   * 为了让pm2管理，让多进程共享session，用redis存放session
-  * 
+   
 ##环境要求：
 
   * node.js(v6.4.0)
   * mysql5
   * edis3
-  * 
+   
 ##安装指南
 
     1.安装canvas模块
