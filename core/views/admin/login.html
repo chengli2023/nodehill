@@ -49,10 +49,10 @@
 						<br>
 						<p>
 							<input type="checkbox"> 记住密码
-							<span class="pull-right"><a href="/">找回密码</a></span>
+							<span class="pull-right"><a href="#">找回密码</a></span>
 						</p>
 						<br>
-						<a href="javascript:void(0);$('#adminLoginForm').submit()" class="btn btn-large btn-block orange-btn">登 录</a>
+						<a href="#" onclick="submitFun()" class="btn btn-large btn-block orange-btn">登 录</a>
 					</div>
 				</form>
 			</div>
@@ -61,6 +61,9 @@
 			<div class="copyright text-center">Copyright ©2016 无锡法院</div>
 		</div>
 	<script>
+		function submitFun(){
+			$('#adminLoginForm').submit()
+		}
 		function refreshVerifyCode(t){
 			$.ajax({
 				type: "GET",

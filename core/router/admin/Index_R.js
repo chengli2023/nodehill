@@ -7,11 +7,14 @@ router.get('/login', indexController(indexController.loginGet));
 router.post('/login', indexController(indexController.loginPost));
 router.get('/refreshVerifyCode', indexController(indexController.refreshVerifyCodeGet));
 router.get('/logout', indexController(indexController.logoutGet));
-router.get('/search', indexController(indexController.searchGet));
+
 router.get('/profile', indexController(indexController.profileGet));
 
 router.get('/userCheckSameEmail', indexController(indexController.userCheckSameEmailGet));
 router.get('/checkPassword', indexController(indexController.checkPasswordGet));
 router.post('/updateEmail', indexController(indexController.updateEmailPost));
 router.post('/updatePassword', indexController(indexController.updatePasswordPost));
+
+router.get('/search', indexController(indexController.searchGet));
+router.get('/search/result', indexController(indexController.searchResultGet));
 module.exports = router;

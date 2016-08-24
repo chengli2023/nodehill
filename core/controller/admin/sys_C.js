@@ -106,6 +106,7 @@ exports.resEditPost = function (req, res, next) {
         let pid = req.body['res_pid']
         let url = req.body['res_url']
         let restype = req.body['res_type']
+        let reskey = req.body['res_key']
         let desc = req.body['res_desc']
         let order = req.body['res_order']
         let icon = req.body['res_icon']
@@ -113,7 +114,7 @@ exports.resEditPost = function (req, res, next) {
         let b = yield self.checkSameInRes({res_name:name,res_pid:pid,resId});
         if(!b) throw Error('校验失败')
 
-        let updatedArr = yield menuModel.update({name,pid,url,restype,desc,order,icon},{where:{id:resId}})
+        let updatedArr = yield menuModel.update({name,pid,url,restype,reskey,desc,order,icon},{where:{id:resId}})
         if(updatedArr.length>0){
             res.json({})
             return;
@@ -130,6 +131,7 @@ exports.resAddPost = function (req, res, next) {
         let pid = req.body['res_pid']
         let url = req.body['res_url']
         let restype = req.body['res_type']
+        let reskey = req.body['res_key']
         let desc = req.body['res_desc']
         let order = req.body['res_order']
         let icon = req.body['res_icon']
@@ -138,7 +140,7 @@ exports.resAddPost = function (req, res, next) {
         let b = yield self.checkSameInRes({res_name:name,res_pid:pid,resId:null});
         if(!b) throw Error('校验失败')
 
-        yield menuService.createRes({name,pid,url,restype,desc,order,icon})
+        yield menuService.createRes({name,pid,url,restype,reskey,desc,order,icon})
 
         res.json({})
     }).catch(function(e){

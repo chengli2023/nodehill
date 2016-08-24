@@ -23,10 +23,6 @@
 			<% include ../include/header.html %>
 			<div class="index-container">
 				<% include ../include/menu.html %>
-				<div class="search-box gap-lr text-right">
-					<input type="text" placeholder="模糊查询"> 
-					<a href="list.html" class="btn btn-primary">搜索</a>
-				</div>
 				<ul class="nav-bar">
 					<li class="active"><a>资源管理</a></li>
 				</ul>
@@ -139,6 +135,12 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label for="res_key" class="col-sm-2 control-label">资源唯一KEY</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="res_key" name="res_key" placeholder="资源唯一KEY">
+									</div>
+								</div>
+								<div class="form-group">
 									<label for="res_desc" class="col-sm-2 control-label">资源描述</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="res_desc" name="res_desc" placeholder="资源名称">
@@ -195,6 +197,7 @@
 								$('#addModal #res_pid').val(data.pid)
 								$('#addModal #res_url').val(data.url)
 								$('#addModal #res_type').val(data.restype)
+								$('#addModal #res_key').val(data.reskey)
 								$('#addModal #res_desc').val(data.desc)
 								$('#addModal #res_order').val(data.order)
 								$('#addModal #res_icon').val(data.icon)
@@ -260,6 +263,9 @@
 						res_type: {
 							required: true
 						},
+						res_key: {
+							required: true
+						},
 						res_desc: {
 							required: false
 						},
@@ -294,6 +300,7 @@
 							res_pid: $('#res_pid').val(),
 							res_url: $('#res_url').val(),
 							res_type: $('#res_type').val(),
+							res_key: $('#res_key').val(),
 							res_desc: $('#res_desc').val(),
 							res_order: $('#res_order').val(),
 							res_icon: $('#res_icon').val()

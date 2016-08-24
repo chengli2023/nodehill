@@ -37,7 +37,7 @@ exports.updateRole = function* ({userId,roleIds,transaction}) {
             sql += "  UNION ALL "
         }
     }
-    sql = 'INSERT INTO Admin_ROle(created_at,updated_at,adminid_fk,roleid_fk) ' + sql;
+    sql = 'INSERT INTO Admin_Role(created_at,updated_at,adminid_fk,roleid_fk) ' + sql;
     let inserted = yield db.query(sql,{replacements: [],type:Sequelize.QueryTypes.INSERT,transaction});
 
 };

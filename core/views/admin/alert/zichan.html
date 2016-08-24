@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>搜索</title>
+		<title>资源管理</title>
         <meta name="description" content="无锡">
-        <meta name="viewport" content="width=1200" />
+        <meta name="viewport" content="width=1200">
 		<link rel="shortcut icon" href="/public/images/favicon.png">
 		<link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
 		<link rel="stylesheet" href="/public/bower_components/components-font-awesome/css/font-awesome.min.css">
@@ -13,25 +13,29 @@
 		<script src="/public/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
 		<script src="/public/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
 		<script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<script src="/public/javascripts/echart.js"></script>
 		<script src="/public/javascripts/common.js"></script>
+		<script src="http://api.map.baidu.com/api?v=2.0&ak=M4WuvO1b7mNfpgFGSlRaGb7Ej0twphUq"></script>
 	</head>
 	<body>
 		<div class="wrapper">
-			<% include ./include/header.html %>
+			<% include ../include/header.html %>
 			<div class="index-container">
-				<% include ./include/menu.html %>
-				<div class="index-search">
-					<div class="search-box">
-						<input type="text" placeholder="模糊查询" /> 
-						<a href="/admin/search/result" class="btn btn-primary">搜索</a>
-					</div>
-					<br />
-					<p class="gray-color">1.支持模糊查询 </p>
-					<p class="gray-color">2.可输入姓名,身份证号,手机号</p>
+				<% include ../include/menu.html %>
+				<ul class="nav-bar">
+					<li class="active"><a>告警通知配置</a></li>
+				</ul>
+				<div class="gap">
+
 				</div>
 			</div>
 			<div class="push"></div>
-		</div><!--wrapper -->
-		<% include ./include/footer.html %>
+		</div>
+		<% include ../include/footer.html %>
+		<script>
+
+
+		</script>
 	</body>
 </html>

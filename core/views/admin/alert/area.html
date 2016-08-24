@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>资源管理</title>
+        <meta name="description" content="无锡">
+        <meta name="viewport" content="width=1200">
+		<link rel="shortcut icon" href="/public/images/favicon.png">
+		<link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+		<link rel="stylesheet" href="/public/bower_components/components-font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/public/stylesheets/main.css">
+		<script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
+		<script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<script src="/public/javascripts/echart.js"></script>
+		<script src="/public/javascripts/common.js"></script>
+		<script src="http://api.map.baidu.com/api?v=2.0&ak=M4WuvO1b7mNfpgFGSlRaGb7Ej0twphUq"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<% include ../include/header.html %>
+			<div class="index-container">
+				<% include ../include/menu.html %>
+
+				<ul class="nav-bar">
+					<li class="active"><a>告警通知配置</a></li>
+				</ul>
+				<div class="gap">
+					<div class="box-w60 nogap">
+						<div class="area-bar">
+
+							<button class="clear-area btn" onclick="clearAll()">清除区域</button>
+							<div id="warn-area" style="height: 500px; width: 100%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="push"></div>
+		</div>
+		<% include ../include/footer.html %>
+		<script src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+		<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css">
+
+		<script src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+		<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css">
+		<script>
+			var map = new BMap.Map('warn-area');
+			var poi = new BMap.Point(120.299,31.568);
+			map.centerAndZoom(poi, 16);
+			map.enableScrollWheelZoom();
+			//如果已有数据，填充下面的点
+			var polygon = new BMap.Polygon([
+				new BMap.Point(116.387112,39.920977),
+				new BMap.Point(116.385243,39.913063),
+				new BMap.Point(116.394226,39.917988),
+				new BMap.Point(116.401772,39.921364),
+				new BMap.Point(116.41248,39.927893)
+			], {strokeColor:"#3c9dea",fillColor:"#3c9dea", strokeWeight:3, strokeOpacity:0.8,fillOpacity: 0.6,strokeStyle: 'solid'});  //创建多边形
+			//然后创建创建改多边形
+			//map.addOverlay(polygon);
+
+			var overlays = [];
+			var overlaycomplete = function(e){
+				overlays.push(e.overlay);
+				var ponit='' ;
+				for(i in e.overlay.getPath()){
+					//获取坐标
+					console.log(e.overlay.getPath()[i].lng+','+e.overlay.getPath()[i].lat);
+					ponit = ponit+e.overlay.getPath()[i].lng+','+e.overlay.getPath()[i].lat+';'
+
+				}
+				$('input[name="ac_area"]').val(ponit);
+			};
+			var styleOptions = {
+				strokeColor:"#3c9dea",    //边线颜色。
+				fillColor:"#3c9dea",      //填充颜色。当参数为空时，圆形将没有填充效果。
+				strokeWeight: 3,       //边线的宽度，以像素为单位。
+				strokeOpacity: 0.8,	   //边线透明度，取值范围0 - 1。
+				fillOpacity: 0.6,      //填充的透明度，取值范围0 - 1。
+				strokeStyle: 'solid' //边线的样式，solid或dashed。
+			}
+			//实例化鼠标绘制工具
+			var drawingManager = new BMapLib.DrawingManager(map, {
+				isOpen: false, //是否开启绘制模式
+				enableDrawingTool: true, //是否显示工具栏
+				drawingToolOptions: {
+					anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
+					offset: new BMap.Size(5, 5), //偏离值
+					drawingModes : [
+						BMAP_DRAWING_POLYGON,
+					]
+				},
+				polygonOptions: styleOptions, //多边形的样式
+			});
+			//添加鼠标绘制工具监听事件，用于获取绘制结果
+			drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+
+			function clearAll() {
+				for(var i = 0; i < overlays.length; i++){
+					map.removeOverlay(overlays[i]);
+				}
+
+				$('input[name="ac_area"]').val('');
+				overlays.length = 0
+			}
+		</script>
+	</body>
+</html>

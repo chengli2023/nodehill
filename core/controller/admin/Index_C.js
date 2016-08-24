@@ -48,7 +48,7 @@ exports.loginPost = function (req, res, next) {
     let username = req.body['username']
     let password = req.body['password']
     let verifyCode = req.body['verifyCode']
-    if(req.session.verifyCode!=verifyCode){
+    if(req.session.verifyCode.toLowerCase()!=verifyCode.toLowerCase()){
         res.json({error: '验证码错误'});
         return;
     }
@@ -75,6 +75,9 @@ exports.logoutGet = function (req, res, next) {
 }
 exports.searchGet = function (req, res, next) {
     res.render4admin('admin/search', {req});
+}
+exports.searchResultGet = function (req, res, next) {
+    res.render4admin('admin/searchResult', {req});
 }
 exports.profileGet = function (req, res, next) {
     // let userId = utilsController.getAdminSession().id

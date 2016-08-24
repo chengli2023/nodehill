@@ -9,6 +9,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require("express-session");
+var RedisStore = require('connect-redis')(session);
 var ejs = require('ejs');
 var log4js = require('log4js');
 log4js.configure('core/config/log4jsConfig.json',{ reloadSecs: 5 });
@@ -16,6 +17,10 @@ var co = require('co');
 var checkLogin = require('../middleware/admin/chekLogin')
 var authorization = require('../middleware/admin/authorization')
 var utilsController = require('../controller/admin/utils_C')
+
+const database = require('../config/db/db')
+
+
 //数据库初始化
 require('../models/dbInit')
 
@@ -32,14 +37,11 @@ module.exports = function (app) {
     app.use(cookieParser());
 
     app.use(session({
-        cookie :{maxAge:36000000,path:'/'},
+        cookie :{maxAge:360000,path:'/'},
         secret: 'keyboard cat',
         saveUninitialized: false,
-        resave: true
-        /*store: new mongoStore({
-         url: dbConfig.db,
-         collection: 'sessions'
-         })*/
+        resave: true,
+        store: new RedisStore({})
     }));
     app.use('/public', express.static(path.resolve('public')));
     //app.use(log4js.connectLogger(log4js.getLogger("http"), { level: 'auto' }));
@@ -60,7 +62,9 @@ module.exports = function (app) {
             '/admin/userCheckSameEmail',
             '/admin/checkPassword',
             '/admin/updateEmail',
-            '/admin/updatePassword'
+            '/admin/updatePassword',
+
+            '/admin/search/result',
         ]
     }));
 

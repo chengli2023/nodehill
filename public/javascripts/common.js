@@ -24,7 +24,6 @@ $(document).ready(function(){
 			}else{
 				$('.left-nav').animate({paddingTop:"100px"},50)
 			}
-			console.log($(window).scrollLeft());
 			$('.left-nav').css('left',-$(window).scrollLeft());
 		})
 	}

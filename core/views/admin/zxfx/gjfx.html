@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>资源管理</title>
+        <meta name="description" content="无锡">
+        <meta name="viewport" content="width=1200">
+		<link rel="shortcut icon" href="/public/images/favicon.png">
+		<link rel='stylesheet' href='/public/bower_components/bootstrap/dist/css/bootstrap.css'/>
+		<link rel="stylesheet" href="/public/bower_components/components-font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/public/stylesheets/main.css">
+		<script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+		<script src="/public/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
+		<script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<script src="/public/javascripts/echart.js"></script>
+		<script src="/public/javascripts/common.js"></script>
+		<script src="http://api.map.baidu.com/api?v=2.0&ak=M4WuvO1b7mNfpgFGSlRaGb7Ej0twphUq"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<% include ../include/header.html %>
+			<div class="index-container">
+				<% include ../include/menu.html %>
+				<ul class="nav-bar">
+					<li class="active"><a>轨迹分析</a></li>
+				</ul>
+				<div class="gap">
+					<div class="box-w100 nogap">
+						<div class=" border-box nogap">
+							<div id="warn-tracks" style="height: 500px; width: 100%"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="push"></div>
+		</div>
+		<% include ../include/footer.html %>
+		<script>
+			//假定数据
+			var data_poi =[
+				{'lat':'31.581907','lng':'120.296574'},
+				{'lat':'31.581415','lng':'120.295574'},
+				{'lat':'31.571107','lng':'120.29343'},
+				{'lat':'31.570861','lng':'120.293287'},
+				{'lat':'31.570492','lng':'120.293862'},
+				{'lat':'31.571323','lng':'120.294868'}
+			]
+			// 百度地图API功能
+			var map = new BMap.Map("warn-tracks");
+			var poi = new BMap.Point(data_poi[0].lng,data_poi[0].lat);
+			map.centerAndZoom(poi, 16);
+			map.enableScrollWheelZoom();
+			var myIcon = new BMap.Icon("/public/images/people.png", new BMap.Size(15, 70), {    //小车图片
+				//offset: new BMap.Size(0, -5),    //相当于CSS精灵
+				imageOffset: new BMap.Size(0, 0)    //图片的偏移量。为了是图片底部中心对准坐标点。
+			});
+			var polylineArray =[];
+			for (i in data_poi){
+				polylineArray[i]= new BMap.Point(data_poi[i].lng, data_poi[i].lat)
+			}
+			var polyline = new BMap.Polyline(polylineArray, {strokeColor:"#3c9dea", strokeWeight:3, strokeOpacity:0.5});   //创建折线
+			map.addOverlay(polyline);
+
+			window.run = function (){
+
+				var pts = polyline.getPath();
+				var paths = pts.length-1;    //获得有几个点
+				var carMk = new BMap.Marker(pts[0],{icon:myIcon});
+				map.addOverlay(carMk);
+				i=0;
+				function resetMkPoint(i){
+					carMk.setPosition(pts[i]);
+					if(i < paths){
+						setTimeout(function(){
+							i++;
+							resetMkPoint(i);
+							map.panTo(new BMap.Point(pts[i].lng,pts[i].lat));
+						},500);
+					}
+				}
+				setTimeout(function(){
+					resetMkPoint(0);
+				},100)
+
+
+			}
+
+			setTimeout(function(){
+				run(); //2秒后开跑
+			},2000);
+		</script>
+	</body>
+</html>

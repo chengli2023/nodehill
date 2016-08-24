@@ -1,12 +1,13 @@
 
 var path = require('path');
-var utils = require('../../lib/utils');
+var utils = require('../../../lib/utils');
 var crypto = require('crypto');
 var util = require('util');
 var co = require('co');
 var logger = require('log4js').getLogger('CONTROLLER:INDEX');
 
-var db = require('../config/db/db')
+
+var utilsController = require('./utils_C')
 
 exports = module.exports = function(handle){
     //var opts = options || {};
@@ -19,6 +20,19 @@ exports = module.exports = function(handle){
     handler.__proto__ = exports;
     return handler;
 };
-exports.index = function(req, res, next) {
-    res.redirect('/admin/search')
-};
+
+exports.receiverGet = function (req, res, next) {
+    res.render4admin('admin/alert/receiver', {
+        req
+    });
+}
+exports.zichanGet = function (req, res, next) {
+    res.render4admin('admin/alert/zichan', {
+        req
+    });
+}
+exports.areaGet = function (req, res, next) {
+    res.render4admin('admin/alert/area', {
+        req
+    });
+}

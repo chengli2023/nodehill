@@ -3,14 +3,19 @@
         <img src="/public/images/logo1.png" />
         <div class="pull-right">
             <div class="header-info">
-                <p><%=commonData.rolenames.join(',')%>:<a href="/admin/profile"><%=commonData.username%></a></p>
+                <div><%=commonData.rolenames.join(',')%>:<a href="/admin/profile"><%=commonData.username%></a></div>
                 <!--<div>现时间：<span id="now-time"></span></div>-->
+                <div class="search-box " style="margin-top: 10px;">
+                    <input type="text" placeholder="输入需要查询的姓名或身份证号">
+                    <a href="/admin/search/result" class="btn btn-primary">搜索</a>
+                </div>
             </div>
             <div class="line-gap"></div>
             <a href="/admin/logout">
                 <i class="fa fa-power-off"></i>
             </a>
         </div>
+
 
     </div>
 </div><!-- blue-bg -->

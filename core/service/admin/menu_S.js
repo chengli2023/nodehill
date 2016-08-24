@@ -9,13 +9,13 @@ var db = require('../../config/db/db')
 exports = module.exports = {}
 
 
-exports.createRes = function({name,pid,url,restype,desc,order,icon}){
+exports.createRes = function({name,pid,url,restype,reskey,desc,order,icon}){
     let transaction = null;
     return co(function* (){
         transaction = yield db.transaction({
             isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.READ_COMMITTED
         })
-        let resObj = yield menuModel.create({name,pid,url,restype,desc,order,icon},{transaction})
+        let resObj = yield menuModel.create({name,pid,url,restype,reskey,desc,order,icon},{transaction})
 
         let superRole = yield roleModel.findOne({where:{type:0}})
         //给超级管理员增加权限
