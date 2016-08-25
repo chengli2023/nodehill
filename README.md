@@ -51,20 +51,24 @@
 ##运行/停止
 
   * pm2托管
-        1.执行./pm2-start.sh，即可启动/或重启
+  
+         1.执行./pm2-start.sh，即可启动/或重启
 
-        2.执行./pm2-stop.sh，即可停止
+         2.执行./pm2-stop.sh，即可停止
         
-        3.执行pm2 logs查看运行是否报错
+         3.执行pm2 logs查看运行是否报错
         
   * 单进程运行
+  
         1.执行:node ./bin/www
 
 ##访问
 
-   访问：http://localhost:port
-   帐号：admin
-   密码：admin
+      访问：http://localhost:port
+   
+      帐号：admin
+   
+      密码：admin
         
 ## License
 
