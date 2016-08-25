@@ -23,15 +23,12 @@
    
 ##安装指南
 
-    1.安装canvas模块
+     1.安装canvas模块
         参照：https://www.npmjs.com/package/canvas
-        
-    2.安装pm2模块
+     2.安装pm2模块
         参照：https://www.npmjs.com/package/pm2
-        
-    3.安装redis，并启动
-    
-    4.在项目根目录下运行npm install
+     3.安装redis，并启动
+     4.在项目根目录下运行npm install
     
 ##配置
 
@@ -46,13 +43,12 @@
     
 ##运行/停止
 
-  * pm2托管
-  
-        1.执行./pm2-start.sh，即可启动/或重启
-        2.执行./pm2-stop.sh，即可停止
-        3.执行pm2 logs查看运行是否报错
+    * pm2托管
+      1.执行./pm2-start.sh，即可启动/或重启
+      2.执行./pm2-stop.sh，即可停止
+      3.执行pm2 logs查看运行是否报错
         
-  * 单进程运行
+    * 单进程运行
   
         1.执行:node ./bin/www
 
