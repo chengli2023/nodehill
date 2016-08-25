@@ -3,7 +3,7 @@
 ##主要功能
 
     * 后台用户管理
-     CRUD，密码重置,发邮件,多角色管理
+     CRUD，密码重置并邮件通知,多角色管理
     * 资源管理
      CRUD
     * 角色管理
@@ -42,7 +42,11 @@
     3.配置数据库：./core/config/db/db.js
         并且在你的mysql中创建对应的数据库
         
-    4.首次运行前，要修改./core/models/dbinit.js，把数据预制的代码放开（去掉注释），成功运行后记住要恢复
+    4.配置邮件服务器、授权密码等
+         ./lib/mailer.js
+        
+    5.首次运行前，要修改./core/models/dbinit.js，
+      1.把数据预制的代码放开（去掉注释），成功运行后记住要恢复
     
 ##运行/停止
 
@@ -55,6 +59,12 @@
         
   * 单进程运行
         1.执行:node ./bin/www
+
+##访问
+
+   访问：http://localhost:port
+   帐号：admin
+   密码：admin
         
 ## License
 
