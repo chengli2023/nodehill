@@ -3,7 +3,7 @@ var router = express.Router();
 var indexController = require('../../controller/admin/index_C')
 
 router.$requestMapping = '/admin';
-router.get('/', indexController(indexController.homeGet));
+router.get('/home', indexController(indexController.homeGet));
 router.get('/login', indexController(indexController.loginGet));
 router.post('/login', indexController(indexController.loginPost));
 router.get('/refreshVerifyCode', indexController(indexController.refreshVerifyCodeGet));
