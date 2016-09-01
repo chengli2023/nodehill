@@ -1,4 +1,4 @@
-#这是一个可以用于企业内部使用的WEB管理系统,具有较高扩展性
+#这是使用NODEJS开发的后台WEB管理系统
 
 ##主要功能
 
@@ -11,15 +11,15 @@
    
 ##技术特点：
 
-    * 使用了ES6语法，使用了ES6的Generator
+    * 使用了ES6语法，使用了ES6的Iterator
     * 用Tj的CO模块，所以不存在回调噩梦
     * 为了让pm2管理，让多进程共享session，用redis存放session
    
 ##环境要求：
 
     node.js(v6.4.0)
-    mysql5
-    edis3
+    mysql(v5)
+    redis(v3)
    
 ##安装指南
 
