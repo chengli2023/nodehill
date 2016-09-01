@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var indexController = require('../controller/Index')
+var indexController = require('../controller/index')
 
 router.$requestMapping = '/';
 router.get('/', indexController(indexController.index));
