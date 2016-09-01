@@ -22,7 +22,7 @@ const database = require('../config/db/db')
 
 
 //数据库初始化
-require('../models/dbInit')
+require('../models/dbinit')
 
 module.exports = function (app) {
     // view engine setup
