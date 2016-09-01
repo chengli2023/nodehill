@@ -15,7 +15,7 @@ var active = '执行分析'
         %>
         <%if(menuObj.nlevel == 0){%>
             <%if(menuObj.restype == 1){%>
-                <li <%if(active == menuObj.name){%>class="active"<%}%>>
+                <li>
                     <div class="nav-title">
                         <span class="fa  fa-<%=menuObj.icon%>"></span>
                         <div class="desktop-chart">
@@ -42,6 +42,9 @@ var active = '执行分析'
             <%}%>
         <%}
         }%>
+        <script>
+
+        </script>
     </ul>
 
 </div><!-- left-nav -->

@@ -1,6 +1,20 @@
-$(document).ready(function(){	
+$(document).ready(function(){
+
+
 	//left-nav
 	if($('.left-nav').length>0){
+
+        $('.left-nav > ul > li').removeClass('active');
+        var resName = window.location.pathname
+        $('.left-nav > ul > li').each(function(){
+            var cate = this;
+            $(cate).find('li').each(function(){
+                if($(this).find('a').attr('href') == resName){
+                    $(this).addClass('active')
+                    $(cate).addClass('active')
+                }
+            })
+        })
 		
 		$('.left-nav > ul > li').each(function(){
 			if($(this).hasClass('active')){
@@ -58,6 +72,7 @@ $.extend($.validator.messages, {
 	min: $.validator.format("请输入一个最小为 {0} 的值")
 });
 $.ajaxSetup({
+    timeout : 60000,
 	error:function(xhr,e,o){
 		var errorMsg = "";
 		if(xhr.status == 500){

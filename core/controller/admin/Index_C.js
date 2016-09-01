@@ -12,6 +12,7 @@ var adminService = require('../../service/admin/admin_S')
 var adminModel = require('../../models/admin/Admin_M')
 
 var verifyCode = require('verify-code');
+var httpAgent = require('../../../lib/httpAgent')({})
 exports = module.exports = function(handle){
     //var opts = options || {};
     function handler(req,res,next){
@@ -71,14 +72,13 @@ exports.loginPost = function (req, res, next) {
 }
 exports.logoutGet = function (req, res, next) {
     utilsController.clearAdminLoginSession(req)
+    res.clearCookie('personId',{ path: '/admin'})//TODO:chengli
     res.redirect('/admin/login')
 }
-exports.searchGet = function (req, res, next) {
-    res.render4admin('admin/search', {req});
+exports.homeGet = function (req, res, next) {
+    res.render4admin('admin/home', {req});
 }
-exports.searchResultGet = function (req, res, next) {
-    res.render4admin('admin/searchResult', {req});
-}
+
 exports.profileGet = function (req, res, next) {
     // let userId = utilsController.getAdminSession().id
     // let userObj = adminModel.findOne({where:{id:userId},attributes:['username','email']})

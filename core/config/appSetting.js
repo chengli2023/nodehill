@@ -37,9 +37,9 @@ module.exports = function (app) {
     app.use(cookieParser());
 
     app.use(session({
-        cookie :{maxAge:360000,path:'/'},
+        cookie :{maxAge:36000000,path:'/'},
         secret: 'keyboard cat',
-        saveUninitialized: false,
+        saveUninitialized: true,
         resave: true,
         store: new RedisStore({})
     }));
@@ -52,19 +52,19 @@ module.exports = function (app) {
     //后台系统-权限控制
     app.use('/admin',authorization({
         escapeACL:[//不需要权限控制的资源
-            '/admin/logout',
-            '/admin/profile',
-            '/admin/sys/res/checkSameNameInRes',
-            '/admin/sys/role/roleCheckSameName',
-            '/admin/sys/user/userCheckSameName',
-            '/admin/sys/user/refreshPassword',
+            '/admin/home',//首页
+            '/admin/logout',//退出
+            '/admin/profile',//当前登录用户的个人信息
+            '/admin/sys/res/checkSameNameInRes',//校验资源名称是否有重复的
+            '/admin/sys/role/roleCheckSameName',//校验角色名称是否有重复的
+            '/admin/sys/user/userCheckSameName',//校验用户名称是否有重复的
+            '/admin/sys/user/refreshPassword',//生成密码
 
-            '/admin/userCheckSameEmail',
-            '/admin/checkPassword',
-            '/admin/updateEmail',
-            '/admin/updatePassword',
+            '/admin/userCheckSameEmail',//校验用户的Email是否重复
+            '/admin/checkPassword',//登录密码校验
+            '/admin/updateEmail',//用于当前用户修改邮箱
+            '/admin/updatePassword'//用于当前用户修改密码
 
-            '/admin/search/result',
         ]
     }));
 

@@ -18,7 +18,7 @@ Menu.belongsToMany(Role,{through: {model:'Role_Menu',unique: false}, foreignKey:
 Role.belongsToMany(Menu,{through: {model:'Role_Menu',unique: false}, foreignKey: 'roleid_fk'})
 
 //persistent
-/*co(function* (){
+co(function* (){
     yield db.sync({force: true})
     let adminObj = yield Admin.create({username: 'admin', email: 'chengli2023@foxmail.com', password: utils.encryptPassword('admin','admin')})
     let adminObj2 = yield Admin.create({username: 'demo', email: '316094847@qq.com', password: utils.encryptPassword('demo','demo')})
@@ -27,11 +27,9 @@ Role.belongsToMany(Menu,{through: {model:'Role_Menu',unique: false}, foreignKey:
     yield adminObj.addRole([roleObje])
     yield adminObj2.addRole([roleObje2])
 
-
     let menu_sys =      yield Menu.create({name: '系统设置', pid: 0, url: '/admin/sys',restype:1,reskey:'sysSet',desc:'系统设置',order:3,icon:'cog'})
     let menu_user =     yield Menu.create({name: '用户管理', pid: menu_sys.id, url: '/admin/sys/user',restype:2,reskey:'sysUserSet',desc:'用户管理',order:1,icon:'users'})
     let menu_res =      yield Menu.create({name: '资源管理', pid: menu_sys.id, url: '/admin/sys/res',restype:2,reskey:'resManage',desc:'资源管理',order:2,icon:'file'})
-
 
     let menu_role =       yield Menu.create({name: '角色管理', pid: menu_sys.id, url: '/admin/sys/role',restype:2,reskey:'roleSet',desc:'角色管理',order:3,icon:'envira'})
     let menu_addRes =     yield Menu.create({name: '添加资源', pid: menu_res.id, url: '/admin/sys/res/add',restype:3,reskey:'resAdd',desc:'添加资源',order:1,icon:''})
@@ -49,31 +47,15 @@ Role.belongsToMany(Menu,{through: {model:'Role_Menu',unique: false}, foreignKey:
     let menu_createUser = yield Menu.create({name: '创建用户', pid: menu_user.id, url: '/admin/sys/user/create',restype:3,reskey:'userCreate',desc:'创建用户',order:3,icon:''})
     let menu_detailUser = yield Menu.create({name: '获取用户详细', pid: menu_user.id, url: '/admin/sys/user/detail',restype:3,reskey:'userDetail',desc:'获取用户详细信息',order:3,icon:''})
 
-    /!*********以下都是非网站基础功能,是业务和项目相关的*******!/
-    //告警管理
-    let menu_alert =    yield Menu.create({name: '告警管理', pid: 0, url: '/admin/alert',restype:1,reskey:'alertSet',desc:'告警设置',order:2,icon:'warning'})
-    let menu_alert_receiver =  yield Menu.create({name: '告警通知配置', pid: menu_alert.id, url: '/admin/alert/receiver',restype:2,reskey:'alert_zichan',desc:'告警通知配置',order:1,icon:'bell'})
-    let menu_alert_zichan =  yield Menu.create({name: '资产配置', pid: menu_alert.id, url: '/admin/alert/zichan',restype:2,reskey:'alert_zichan',desc:'资产配置',order:1,icon:'bell'})
-    let menu_alert_area =  yield Menu.create({name: '电子栅栏配置', pid: menu_alert.id, url: '/admin/alert/area',restype:2,reskey:'alert_area',desc:'电子栅栏配置',order:1,icon:'bell'})
-
-    let menu_search =   yield Menu.create({name: '搜索', pid: 0, url: '/admin/search',restype:3,reskey:'search',desc:'搜索页面',order:1,icon:''})
-    //执行分析
-    let menu_zxfx =      yield Menu.create({name: '执行分析', pid: 0, url: '/admin/zxfx',restype:1,reskey:'zxfx',desc:'执行分析',order:1,icon:'desktop'})
-    let menu_zxfx_profile = yield Menu.create({name: '个人信息', pid: menu_zxfx.id, url: '/admin/zxfx/profile',restype:2,reskey:'zxfx_profile',desc:'个人信息',order:1,icon:'user'})
-    let menu_zxfx_sheAnInfo = yield Menu.create({name: '涉案信息', pid: menu_zxfx.id, url: '/admin/zxfx/sheaninfo',restype:2,reskey:'zxfx_sheaninfo',desc:'涉案信息',order:2,icon:'file'})
-    let menu_zxfx_zcfx = yield Menu.create({name: '资产分析', pid: menu_zxfx.id, url: '/admin/zxfx/zcfx',restype:2,reskey:'zxfx_zcfx',desc:'资产分析',order:3,icon:'file'})
-    let menu_zxfx_gjfx = yield Menu.create({name: '轨迹分析', pid: menu_zxfx.id, url: '/admin/zxfx/gjfx',restype:2,reskey:'zxfx_gjfx',desc:'轨迹分析',order:3,icon:'file'})
-    let menu_zxfx_xffx = yield Menu.create({name: '消费分析', pid: menu_zxfx.id, url: '/admin/zxfx/xffx',restype:2,reskey:'zxfx_xffx',desc:'消费分析',order:4,icon:'file'})
-
+    /*********以下都是非网站基础功能,是业务和项目相关的*******/
     //监控管理
     let menu_monitor =   yield Menu.create({name: '监控管理', pid: 0, url: '/admin/monitor',restype:1,reskey:'monitor',desc:'监控管理',order:1,icon:'user-secret'})
     let menu_monitor_interface = yield Menu.create({name: '接口监控', pid: menu_monitor.id, url: '/admin/monitor/interface',restype:2,reskey:'monitor_interface',desc:'接口监控',order:4,icon:'binoculars'})
     let menu_monitor_server = yield Menu.create({name: '服务器监控', pid: menu_monitor.id, url: '/admin/monitor/server',restype:2,reskey:'monitor_server',desc:'服务器监控',order:4,icon:'binoculars'})
-    /!*********以上都是非网站基础功能,是业务和项目相关的*******!/
+    /*********以上都是非网站基础功能,是业务和项目相关的*******/
 
     //给超级管理员预制权限
     yield roleObje.addMenu([
-        menu_search,
         menu_sys,
         menu_user,
         menu_res,
@@ -92,36 +74,13 @@ Role.belongsToMany(Menu,{through: {model:'Role_Menu',unique: false}, foreignKey:
         menu_editUser,
         menu_createUser,
         menu_detailUser,
-        /!*********以下都是非网站基础功能,是业务和项目相关的*******!/
-        menu_alert,
-        menu_alert_receiver,
-        menu_alert_zichan,
-        menu_alert_area,
-
-        menu_zxfx,
-        menu_zxfx_sheAnInfo,
-        menu_zxfx_profile,
-        menu_zxfx_zcfx,
-        menu_zxfx_gjfx,
-        menu_zxfx_xffx,
+        /*********以下都是非网站基础功能,是业务和项目相关的*******/
         menu_monitor,
         menu_monitor_interface,
         menu_monitor_server])
 
     //普通管理员权限预制
     yield roleObje2.addMenu([
-        menu_search,
-        menu_alert,
-        menu_alert_receiver,
-        menu_alert_zichan,
-        menu_alert_area,
-
-        menu_zxfx,
-        menu_zxfx_sheAnInfo,
-        menu_zxfx_profile,
-        menu_zxfx_zcfx,
-        menu_zxfx_gjfx,
-        menu_zxfx_xffx,
         menu_monitor,
         menu_monitor_interface,
         menu_monitor_server
@@ -135,4 +94,4 @@ Role.belongsToMany(Menu,{through: {model:'Role_Menu',unique: false}, foreignKey:
     console.error('oooh, did you enter wrong database credentials?')
     console.log(e)
 });
-*/
+

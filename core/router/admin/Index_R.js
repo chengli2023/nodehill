@@ -3,6 +3,7 @@ var router = express.Router();
 var indexController = require('../../controller/admin/index_C')
 
 router.$requestMapping = '/admin';
+router.get('/', indexController(indexController.homeGet));
 router.get('/login', indexController(indexController.loginGet));
 router.post('/login', indexController(indexController.loginPost));
 router.get('/refreshVerifyCode', indexController(indexController.refreshVerifyCodeGet));
@@ -15,6 +16,4 @@ router.get('/checkPassword', indexController(indexController.checkPasswordGet));
 router.post('/updateEmail', indexController(indexController.updateEmailPost));
 router.post('/updatePassword', indexController(indexController.updatePasswordPost));
 
-router.get('/search', indexController(indexController.searchGet));
-router.get('/search/result', indexController(indexController.searchResultGet));
 module.exports = router;

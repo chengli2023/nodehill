@@ -20,5 +20,5 @@ exports = module.exports = function(handle){
     return handler;
 };
 exports.index = function(req, res, next) {
-    res.redirect('/admin/search')
+    res.redirect('/admin')
 };

@@ -6,8 +6,10 @@
                 <div><%=commonData.rolenames.join(',')%>:<a href="/admin/profile"><%=commonData.username%></a></div>
                 <!--<div>现时间：<span id="now-time"></span></div>-->
                 <div class="search-box " style="margin-top: 10px;">
-                    <input type="text" placeholder="输入需要查询的姓名或身份证号">
-                    <a href="/admin/search/result" class="btn btn-primary">搜索</a>
+                    <form id="searchForm" name="searchForm" method="get" action="/admin/search/result">
+                        <input style="color: #000000" type="text" name="keyword" placeholder="">
+                        <button  class="btn btn-primary">搜索</button>
+                    </form>
                 </div>
             </div>
             <div class="line-gap"></div>

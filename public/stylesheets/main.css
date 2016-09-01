@@ -112,7 +112,8 @@ h1, h2, h3, h4, h5, h6 {
 
 table {
   border-collapse: collapse;
-  border-spacing: 0; }
+  border-spacing: 0;
+width: 100%}
 
 caption, th {
   text-align: left; }
@@ -227,6 +228,12 @@ input[type="checkbox"], input[type="radio"] {
 .input-block {
   width: 100%; }
 
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="submit"], input[type="reset"] {
+  padding: 5px 12px;}
 /*.btn {*/
   /*padding: 11px 16px;*/
   /*padding: 9px 16px\9;*/
@@ -321,7 +328,7 @@ input[type="checkbox"], input[type="radio"] {
   top: 0px;
   border-right: 1px solid #ccc;
   padding: 100px 0 71px;
-  width: 200px;
+  width: 230px;
   height: 100%;
   box-sizing: border-box;
   overflow-y: auto;
@@ -355,7 +362,7 @@ input[type="checkbox"], input[type="radio"] {
   cursor: default; }
 
 .left-nav li li > a, .left-nav li li > span {
-  padding: 15px 20px 15px 40px;
+  padding: 15px 20px 15px 60px;
   border-bottom: 1px solid #ccc;
   display: block;
   color: #333; }
@@ -507,7 +514,7 @@ html, body {
   box-sizing: border-box; }
 
 .index-container {
-  margin-left: 201px;
+  margin-left: 231px;
   overflow-x: hidden; }
 
 .header, .footer {
@@ -625,7 +632,9 @@ html, body {
 .search-box input[type="text"] {
   width: 300px;
   height: 35px;
-  border-radius: 0; }
+  border-radius: 0;
+
+}
 
 .search-box .btn {
   width: 80px;

@@ -22,6 +22,7 @@ exports.saveAdminLoginSession = (req,{id,username,rolename})=>{
         u_id:id,
         u_name:username
     }
+
 }
 exports.clearAdminLoginSession = (req)=>{
     req.session.adminUser = null;
