@@ -225,15 +225,11 @@ select:focus, button:focus {
 input[type="checkbox"], input[type="radio"] {
   vertical-align: middle; }
 
+
 .input-block {
   width: 100%; }
 
-input[type="text"],
-input[type="password"],
-input[type="tel"],
-input[type="number"],
-input[type="submit"], input[type="reset"] {
-  padding: 5px 12px;}
+
 /*.btn {*/
   /*padding: 11px 16px;*/
   /*padding: 9px 16px\9;*/

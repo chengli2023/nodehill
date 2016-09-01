@@ -16,4 +16,5 @@ router.get('/checkPassword', indexController(indexController.checkPasswordGet));
 router.post('/updateEmail', indexController(indexController.updateEmailPost));
 router.post('/updatePassword', indexController(indexController.updatePasswordPost));
 
+
 module.exports = router;
